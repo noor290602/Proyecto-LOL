@@ -156,11 +156,6 @@ footer {
 }
 
 .links-grid a:hover{
-    text-decoration: none;
-    text-decoration-line: none;
-
-    font-size: 16px;
-    font-weight: bold;
     color: #bd9339b6;
 }
 

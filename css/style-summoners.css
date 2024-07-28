@@ -84,9 +84,14 @@ nav ul li a{
 /* FOOTER*/
 
 footer {
-    position: relative;
     background-color: #000000a2;
     padding: 20px;
+
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 100%;
+    bottom: 0;
 }
 
 .footer1 {
@@ -111,13 +116,9 @@ footer {
 }
 
 .links-grid a:hover{
-    text-decoration: none;
-    text-decoration-line: none;
-
-    font-size: 16px;
-    font-weight: bold;
     color: #bd9339b6;
 }
+
 
 hr {
     margin-right: 30px;
