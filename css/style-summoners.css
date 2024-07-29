@@ -81,6 +81,40 @@ nav ul li a{
     gap: 20px;
 }
 
+/*SUMMONERS MAIN*/
+
+main{
+    height: max-content;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.tituloPrincipal {
+    font-size: 60px;
+    font-family: "Inter Black";
+    font-style: italic;
+    color: white;
+}
+
+.main {
+    margin-top: 14px;
+}
+
+.deco1 {
+    margin-top: 121px;
+    width: 7px;
+    height: auto;
+    background-color: #C89B3C;
+}
+
+.deco2 {
+    width: 7px;
+    height: auto;
+    background-color: #C89B3C;
+}
+
 /* FOOTER*/
 
 footer {
@@ -89,7 +123,7 @@ footer {
 
     box-sizing: border-box;
 
-    position: absolute;
+    position: relative;
     width: 100%;
     bottom: 0;
 }

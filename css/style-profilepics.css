@@ -82,6 +82,68 @@ nav ul li a{
     gap: 20px;
 }
 
+/*PROFILE PICS MAIN*/
+
+main{
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.tituloPrincipal {
+    font-size: 60px;
+    font-family: "Inter Black";
+    font-style: italic;
+    color: white;
+    margin-bottom: 41px;
+}
+
+.deco1 {
+    margin-top: 121px;
+    width: 7px;
+    height: auto;
+    background-color: #C89B3C;
+}
+
+.deco2 {
+    width: 7px;
+    height: auto;
+    background-color: #C89B3C;
+}
+
+/* Buscador */
+
+.probando {
+    border-bottom: 4px solid white;
+    width: 418px;
+    height: 40px;
+}
+
+.buscador {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+}
+
+#buscador{
+    border-style: none;
+    background-color: transparent;
+    box-decoration-break: unset;
+}
+
+input {
+    color: white;
+    font-size: 20px;
+    font-family: "Inter Regular";
+    width: 348px;
+    height: 30px;
+    outline: none; /* Quita el contorno al hacer clic */
+}
+
 /* FOOTER*/
 
 footer {
@@ -90,7 +152,7 @@ footer {
 
     box-sizing: border-box;
 
-    position: absolute;
+    position: relative;
     width: 100%;
     bottom: 0;
 }
