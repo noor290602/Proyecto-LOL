@@ -9,13 +9,13 @@
 
 @font-face {
     font-family: "Inter";
-    src: url("C:/Users/Noor Aloune Sagouma/Appdata/Local/Microsoft/windows/fonts/Inter.ttf");
+    src: "../resources/font";
 }
 
 /* HEADER */
 
 body{
-    height: 100vh;
+    height: max-content;
     background: linear-gradient(to bottom, rgba(2,0,36) 0%, rgba(40,81,163) 100%); 
 }
 
@@ -84,13 +84,19 @@ nav ul li a{
 /* ITEMS MAIN*/
 
 main{
-    height: max-content;
+    height: fit-content;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
-    align-items: center;
     padding-left: 30px;
     padding-right: 30px;
+}
+
+.contenedorMain {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .tituloPrincipal {
