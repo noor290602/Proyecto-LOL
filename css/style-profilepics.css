@@ -65,14 +65,19 @@ nav ul li a{
 
     background-color: #c89c3c5b;
     border-radius: 36px;
-    width: 102px;
+    gap: 5px;
     height: 31px;
-    padding: 5px;
-    
+    padding: 10px;
 
     font-weight: bold; 
     color:#C89B3C; 
     font-size: 18px;
+}
+
+.version select, .idioma select {
+    background-color: transparent;
+    color: #C89B3C;
+    border-style: none;
 }
 
 .opcionesMenu {
@@ -125,7 +130,7 @@ main{
 
 /* Buscador */
 
-.probando {
+.cajaBuscador {
     border-bottom: 4px solid white;
     width: 418px;
     height: 40px;
