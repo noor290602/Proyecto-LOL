@@ -8,13 +8,13 @@
 
 @font-face {
     font-family: "Inter";
-    src: url("C:/Users/Noor Aloune Sagouma/Appdata/Local/Microsoft/windows/fonts/Inter.ttf");
+    src: "../resources/font";
 }
 
 /* HEADER */
 
 body{
-    height: 100vh;
+    height: max-content;
     background: linear-gradient(to bottom, rgba(2,0,36) 0%, rgba(40,81,163) 100%); 
 }
 
@@ -64,13 +64,19 @@ nav ul li a{
 
     background-color: #c89c3c5b;
     border-radius: 36px;
-    width: 102px;
+    gap: 5px;
     height: 31px;
-    padding: 5px;
+    padding: 10px;
 
     font-weight: bold; 
     color:#C89B3C; 
     font-size: 18px;
+}
+
+.version select, .idioma select {
+    background-color: transparent;
+    color: #C89B3C;
+    border-style: none;
 }
 
 .opcionesMenu {
@@ -80,14 +86,162 @@ nav ul li a{
     gap: 20px;
 }
 
-/*CHAMPIONS MAIN*/
+/*CHAMPIONS MAIN*/ 
+
+main{
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.contenedorMain {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.tituloPrincipal {
+    font-size: 60px;
+    font-family: "Inter Black";
+    font-style: italic;
+    color: white;
+    margin-bottom: 41px;
+}
+
+.deco1 {
+    margin-top: 121px;
+    width: 7px;
+    height: auto;
+    background-color: #C89B3C;
+}
+
+.deco2 {
+    width: 7px;
+    height: auto;
+    background-color: #C89B3C;
+}
+
+/* Buscador */
+
+.cajaBuscador {
+    border-bottom: 4px solid white;
+    width: 418px;
+    height: 40px;
+    margin-bottom: 50px;
+}
+
+.buscador {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+}
+
+#buscador{
+    border-style: none;
+    background-color: transparent;
+    box-decoration-break: unset;
+}
+
+input {
+    color: white;
+    font-size: 20px;
+    font-family: "Inter Regular";
+    width: 348px;
+    height: 30px;
+    outline: none; /* Quita el contorno al hacer clic */
+}
+
+/* Filtros */
+
+.filtros {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.filtro1 {
+    display: flex;
+    gap: 10px;
+}
+
+.roles, .estadisticas, .ordenar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.48);
+    border-radius: 36px;
+    width: 250px;
+}
+
+.titulosFiltro {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Tarjetas champions */
+
+.champions {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 20px;
+}
+
+.champions a {
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
+.tarjetaCampeon{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.nombreCampeon {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.imagenCampeon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 204px;
+    height: 260px;
+    border: 3px solid #C89B3C;
+    border-radius: 20px;
+}
+
+.imagenCampeon img {
+    width: 193px;
+    height: 246px;
+    border-radius: 20px;
+}
+
+.main2 {
+    margin-left: 77px;
+    margin-right: 77px;
+}
 
 /* FOOTER*/
 
 footer {
-    position: relative;
     background-color: #000000a2;
     padding: 20px;
+
+    box-sizing: border-box;
+
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    left: 0;
 }
 
 .footer1 {
@@ -112,13 +266,9 @@ footer {
 }
 
 .links-grid a:hover{
-    text-decoration: none;
-    text-decoration-line: none;
-
-    font-size: 16px;
-    font-weight: bold;
     color: #bd9339b6;
 }
+
 
 hr {
     margin-right: 30px;
