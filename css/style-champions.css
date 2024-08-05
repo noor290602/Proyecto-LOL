@@ -7,8 +7,48 @@
 }
 
 @font-face {
-    font-family: "Inter";
-    src: "../resources/font";
+    font-family: "Inter Regular";
+    src: url("../resources/font/Inter-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter Black";
+    src: url("../resources/font/Inter-Black.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter Bold";
+    src: url("../resources/font/Inter-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter ExtraBold";
+    src: url("../resources/font/Inter-ExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter ExtraLight";
+    src: url("../resources/font/Inter-ExtraLight.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter Light";
+    src: url("../resources/font/Inter-Light.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter Medium";
+    src: url("../resources/font/Inter-Medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter SemiBold";
+    src: url("../resources/font/Inter-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter Thin";
+    src: url("../resources/font/Inter-Thin.ttf") format("truetype");
 }
 
 /* HEADER */
