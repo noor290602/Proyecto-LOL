@@ -347,7 +347,7 @@ input {
     color: white;
 }
 
-.imagenCampeon {
+.marcoImagenCampeon {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -357,10 +357,12 @@ input {
     border-radius: 20px;
 }
 
-.imagenCampeon img {
+.imagenCampeon {
     width: 193px;
     height: 246px;
     border-radius: 20px;
+    background-position: center center;
+    background-size: 150%;
 }
 
 /* CHAMPIONS PROFILE -----------------------------------------------------------------------------*/
