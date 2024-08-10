@@ -635,6 +635,14 @@ input {
     border-radius: 45px;
 }
 
+.filasTabla:nth-child(odd){
+    background-color: #0A1428;
+}
+
+.filasTabla:nth-child(even){
+    background-color: #0a14289a;
+}
+
 .estadisticaTabla {
     font-family: "Inter Medium";
     font-size: 14px;
@@ -646,21 +654,15 @@ input {
     flex-direction: row;
     justify-content: space-between;
     width: 440px;
-    gap: 130px;
+    gap: 150px;
 }
 
 .num {
     color: white;
     font-weight: bold;
     font-size: 20px;
-}
-
-.par {
-    background-color: #0A1428;
-}
-
-.impar {
-    background-color: #0a14289a;
+    text-align: center;
+    width: 33%;
 }
 
 .contenedorGrafica {

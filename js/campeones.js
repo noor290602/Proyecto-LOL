@@ -13,7 +13,7 @@ fetch('https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion.json'
     Object.values(champions).forEach(champion => {
         let urlImagenChampion = `https://ddragon.leagueoflegends.com/cdn/14.15.1/img/champion/${champion.image.full}`;
 
-        htmlChampions += `<a class="enlace" href="#" data-idCampeon = "${champion.id}">`;
+        htmlChampions += `<a class="enlace" href="championsProfile.html?id=${champion.id}">`; //forma de pasar variables por una URL -> ?id=
         htmlChampions += '<div class="tarjetaCampeon">';
         htmlChampions += '<div class="marcoImagenCampeon">';
         htmlChampions += `<div class="imagenCampeon" style="background-image: url(${urlImagenChampion}); background-repeat: no-repeat;"></div></div>`;
@@ -21,20 +21,4 @@ fetch('https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion.json'
     });
 
     championsContainer.innerHTML = htmlChampions;
-
-    //Guardamos todos los enlaces en un array
-    let arrayCampeones = document.querySelectorAll(".enlace");
-
-    arrayCampeones.forEach((element) => {
-        //para cada <a> añadir el valor del atributo
-        element.addEventListener("click", function() {
-            const perfilCampeon = this.getAttribute("data-idCampeon");
-            const infoAñadidaURL = new URLSearchParams({id: perfilCampeon}).toString();
-           
-            //Accedemos al objeto ventan (la barra de búsqueda del navegador) para escribir el link
-            // el interrogante (?) es importante para que no de indefinido
-            window.location.href = `championsProfile.html?${infoAñadidaURL}`;
-        })
-        
-    });
 })

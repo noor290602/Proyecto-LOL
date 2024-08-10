@@ -14,8 +14,10 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
         let contenedorChampionProfileImage = document.getElementsByClassName("championProfileImage")[0];
         contenedorChampionProfileImage.innerHTML = '';
 
+
         //Imagen campeon ---------------------------------------------------------------------------------------------------------------------------------
         contenedorChampionProfileImage.style.backgroundImage = `url('https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${idCampeon}_0.jpg')`;
+
 
         //Propiedades ------------------------------------------------------------------------------------------------------------------------------------
         const etiquetas = atributosCampeon.tags; //array etiquetas
@@ -33,6 +35,7 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
                               </div>`;
 
         contenedorChampionProfileImage.innerHTML = contenidoPropiedades;
+
 
         //Nombres ----------------------------------------------------------------------------------------------------------------------------------------
         let contenedorNombres = document.getElementsByClassName("nombres")[0];
@@ -56,6 +59,7 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
 
         contenedorLore.innerHTML = contenidoLore;
 
+
         //Consejos -------------------------------------------------------------------------------------------------------------------------------------------
 
         //Consejos 1 - Aliados 
@@ -68,26 +72,33 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
         let contenidoConsejos1 = "";
         let listaConsejos1 = "";
 
+        if (consejos1.length == 0) {
+            listaConsejos1 = '<p class="contenidoSubconsejo">No hay consejos</p>';
+        }
+
         consejos1.forEach(consejo1 => {
             listaConsejos1 += `<li class="contenidoSubconsejo">	<b>·</b> ${consejo1}<li/>`;
         });
 
-
         contenidoConsejos1 += `<p class="tituloSubconsejo">Aliados:</p>
-                          <ul>${listaConsejos1}</ul>`;
+                                <ul>${listaConsejos1}</ul>`;
 
         contenedorConsejos1.innerHTML = contenidoConsejos1;
 
-        //Consejos 2 - Aliados 
+
+        //Consejos 2 - Enemigos 
 
         let contenedorConsejos2 = document.getElementsByClassName("seccionSubconsejosEnemigos")[0];
         contenedorConsejos2.innerHTML = '';
 
         const consejos2 = atributosCampeon.enemytips;
 
-
         let contenidoConsejos2 = "";
         let listaConsejos2 = "";
+
+        if (consejos2.length == 0) {
+            listaConsejos2 = '<p class="contenidoSubconsejo">No hay consejos</p>';
+        }
 
         consejos2.forEach(consejo2 => {
             listaConsejos2 += `<li class="contenidoSubconsejo">	<b>·</b> ${consejo2}<li/>`;
@@ -112,18 +123,28 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
         contenedorRecurso.innerHTML = contenidoRecurso;
 
 
-        //Tabla
+        //Tabla ---------------------------------------------------------------------------------------------------------------------------------------------------
 
-        let contenedorTabla = document.getElementsByClassName("tabla")[0];
-        contenedorTabla.innerHTML = '';
+        let contenedorTabla = document.getElementById("filas");
+        contenedorTabla.innerHTML = "";
 
-        //Función que calcula el maxLevel y lo redondea a 2 decimales si es el caso
+        atributosEstadisticas = [
+            { label: "Salud", base: "hp", perLevel: "hpperlevel" },
+            { label: "Maná", base: "mp", perLevel: "mpperlevel" },
+            { label: "Velocidad de movimiento", base: "movespeed", perLevel: null },
+            { label: "Armadura", base: "armor", perLevel: "armorperlevel" },
+            { label: "Resistencia mágica", base: "spellblock", perLevel: "spellblockperlevel" },
+            { label: "Rango de ataque", base: "attackrange", perLevel: null },
+            { label: "Regeneración de salud", base: "hpregen", perLevel: "hpregenperlevel" },
+            { label: "Regeneración de maná", base: "mpregen", perLevel: "mpregenperlevel" },
+            { label: "Probabilidad de golpe crítico", base: "crit", perLevel: "critperlevel" },
+            { label: "Daño de ataque", base: "attackdamage", perLevel: "attackdamageperlevel" },
+            { label: "Velocidad de ataque", base: "attackspeed", perLevel: "attackspeedperlevel" }
+        ];
 
-        const calcularMaxLevel = (base, perLevel, level = 17) => { //level = 17 -> deducción
+         //Función que calcula el maxLevel y lo redondea a 2 decimales si es el caso
 
-            if (isNaN(base) || isNaN(perLevel)) {
-                return '-';
-            }
+         const calcularMaxLevel = (base, perLevel, level = 18) => { //level = 18 -> deducción
 
             const maxLevel = base + (perLevel * level);
 
@@ -138,124 +159,30 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
 
             return maxLevelRounded;
         };
+    
+        let contenidoTabla = "";
 
-        const valorOGuion = (valor) => {
-            return (valor === undefined || valor === null || isNaN(valor)) ? '-' : valor;
-        };
+        atributosEstadisticas.forEach(atributo => {
 
-
-        contenidoTabla = ` <div class="headerTabla">
-                                <p class="titHeaderTabla">ESTADÍSTICAS</p>
-                                <div class="restoHeadersTabla">
-                                    <p class="titHeaderTabla">BASE</p>
-                                    <p class="titHeaderTabla">PER LEVEL</p>
-                                    <p class="titHeaderTabla">MAX LEVEL</p>
-                                </div>
+            contenidoTabla += `<div class="filasTabla">
+                            <p class="estadisticaTabla">${atributo.label}</p>
+                            <div class="numeros">
+                                <div class="num">${atributosCampeon.stats[atributo.base]}</div>
+                                <div class="num">${atributosCampeon.stats[atributo.perLevel] ?? '-'}</div>
+                                <div class="num">${atributosCampeon.stats[atributo.perLevel] ? calcularMaxLevel(atributosCampeon.stats[atributo.base], atributosCampeon.stats[atributo.perLevel]) : '-'}</div> 
                             </div>
+                        </div>`
+        });
 
-                            <div class="filasTabla par">
-                                <p class="estadisticaTabla">Salud</p>
-                                <div class="numeros">
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.hp)}</div>
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.hpperlevel)}</div>
-                                    <div class="num">${calcularMaxLevel(atributosCampeon.stats.hp, atributosCampeon.stats.hpperlevel)}</div>
-                                </div>
-                            </div>
+        //? -> if ternario
+        //?? -> operador de cualescencia nula
 
-                            <div class="filasTabla impar">
-                                <p class="estadisticaTabla">Maná</p>
-                                <div class="numeros">
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.mp)}</div>
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.mpperlevel)}</div>
-                                    <div class="num">${calcularMaxLevel(atributosCampeon.stats.mp, atributosCampeon.stats.mpperlevel)}</div>
-                                </div>
-                            </div>
-
-                            <div class="filasTabla par">
-                                <p class="estadisticaTabla">Velocidad de movimiento</p>
-                                <div class="numeros">
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.movespeed)}</div>
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.movespeedperlevel)}</div>
-                                    <div class="num">${calcularMaxLevel(atributosCampeon.stats.movespeed, atributosCampeon.stats.movespeedperlevel)}</div>
-                                </div>
-                            </div>
-
-                            <div class="filasTabla impar">
-                                <p class="estadisticaTabla">Armadura</p>
-                                <div class="numeros">
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.armor)}</div>
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.armorperlevel)}</div>
-                                    <div class="num">${calcularMaxLevel(atributosCampeon.stats.armor, atributosCampeon.stats.armorperlevel)}</div>
-                                </div>
-                            </div>
-
-                            <div class="filasTabla par">
-                                <p class="estadisticaTabla">Resistencia mágica</p>
-                                <div class="numeros">
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.spellblock)}</div>
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.spellblockperlevel)}</div>
-                                    <div class="num">${calcularMaxLevel(atributosCampeon.stats.spellblock, atributosCampeon.stats.spellblockperlevel)}</div>
-                                </div>
-                            </div>
-
-                            <div class="filasTabla impar">
-                                <p class="estadisticaTabla">Rango de ataque</p>
-                                <div class="numeros">
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.attackrange)}</div>
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.attackrangeperlevel)}</div>
-                                    <div class="num">${calcularMaxLevel(atributosCampeon.stats.attackrange, atributosCampeon.stats.attackrangeperlevel)}</div>
-                                </div>
-                            </div>
-
-                            <div class="filasTabla par">
-                                <p class="estadisticaTabla">Regeneración de salud</p>
-                                <div class="numeros">
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.hpregen)}</div>
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.hpregenperlevel)}</div>
-                                    <div class="num">${calcularMaxLevel(atributosCampeon.stats.hpregen, atributosCampeon.stats.hpregenperlevel)}</div>
-                                </div>
-                            </div>
-
-                            <div class="filasTabla impar">
-                                <p class="estadisticaTabla">Regeneración de maná</p>
-                                <div class="numeros">
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.mpregen)}</div>
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.mpregenperlevel)}</div>
-                                    <div class="num">${calcularMaxLevel(atributosCampeon.stats.mpregen, atributosCampeon.stats.mpregenperlevel)}</div>
-                                </div>
-                            </div>
-
-                            <div class="filasTabla par">
-                                <p class="estadisticaTabla">Probabilidad de golpe crítico</p>
-                                <div class="numeros">
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.crit)}</div>
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.critperlevel)}</div>
-                                    <div class="num">${calcularMaxLevel(atributosCampeon.stats.crit, atributosCampeon.stats.critperlevel)}</div>
-                                </div>
-                            </div>
-
-                            <div class="filasTabla impar">
-                                <p class="estadisticaTabla">Daño de ataque</p>
-                                <div class="numeros">
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.attackdamage)}</div>
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.attackdamageperlevel)}</div>
-                                    <div class="num">${calcularMaxLevel(atributosCampeon.stats.attackdamage, atributosCampeon.stats.attackdamageperlevel)}</div>
-                                </div>
-                            </div>
-
-                            <div class="filasTabla par">
-                                <p class="estadisticaTabla">Velocidad de ataque</p>
-                                <div class="numeros">
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.attackspeed)}</div>
-                                    <div class="num">${valorOGuion(atributosCampeon.stats.attackspeedperlevel)}</div>
-                                    <div class="num">${calcularMaxLevel(atributosCampeon.stats.attackspeed, atributosCampeon.stats.attackspeedperlevel)}</div>
-                                </div>
-                            </div>`;
 
         contenedorTabla.innerHTML = contenidoTabla;
 
-        
-        //Gráfica
+
+        //Gráfica ---------------------------------------------------------------------------------------------------------------------------------------------
+
         let ataque = atributosCampeon.info.attack * 40;
         let defensa = atributosCampeon.info.defense * 40;
         let magia = atributosCampeon.info.magic * 40;
@@ -265,7 +192,7 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
         let contenedorBarras = document.getElementsByClassName("barras")[0];
         contenedorBarras.innerHTML = '';
 
-        let contenidoGrafica = `<div class="barra1" style="height: ${ataque}px; width: 54px" data-valor="${ataque / 40}"></div>
+        let contenidoGrafica = `<div class="barra1" style="height: ${ataque}px; width: 54px" data-valor="${ataque / 40}" ></div>
                                 <div class="barra2" style="height: ${defensa}px; width: 54px" data-valor="${defensa / 40}"></div>
                                 <div class="barra3" style="height: ${magia}px; width: 54px" data-valor="${magia / 40}"></div>
                                 <div class="barra4" style="height: ${dificultad}px; width: 54px" data-valor="${dificultad / 40}"></div>`;
@@ -292,9 +219,11 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
         }
 
 
-        //Habilidades
+        //Habilidades -------------------------------------------------------------------------------------------------------------------------------------------
         //TODO 
+        
 
-        //Aspectos
+        //Aspectos -------------------------------------------------------------------------------------------------------------------------------------------
         //TODO
+
     });
