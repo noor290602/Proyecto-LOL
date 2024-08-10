@@ -5,17 +5,15 @@ fetch('https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion.json'
 .then((response) => {
     const json = response;
     const champions = json.data;
+
     const championsContainer = document.getElementsByClassName('tarjetasChampions')[0];
-    console.log(championsContainer);
     championsContainer.innerHTML = '';
     let htmlChampions = '';
 
     Object.values(champions).forEach(champion => {
-        console.log(champion.id);
-
         let urlImagenChampion = `https://ddragon.leagueoflegends.com/cdn/14.15.1/img/champion/${champion.image.full}`;
 
-        htmlChampions += `<a href="championsProfile.html/#${champion.id}">`;
+        htmlChampions += `<a class="enlace" href="#" data-idCampeon = "${champion.id}">`;
         htmlChampions += '<div class="tarjetaCampeon">';
         htmlChampions += '<div class="marcoImagenCampeon">';
         htmlChampions += `<div class="imagenCampeon" style="background-image: url(${urlImagenChampion}); background-repeat: no-repeat;"></div></div>`;
@@ -24,5 +22,19 @@ fetch('https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion.json'
 
     championsContainer.innerHTML = htmlChampions;
 
-    //se sigue aquí
+    //Guardamos todos los enlaces en un array
+    let arrayCampeones = document.querySelectorAll(".enlace");
+
+    arrayCampeones.forEach((element) => {
+        //para cada <a> añadir el valor del atributo
+        element.addEventListener("click", function() {
+            const perfilCampeon = this.getAttribute("data-idCampeon");
+            const infoAñadidaURL = new URLSearchParams({id: perfilCampeon}).toString();
+           
+            //Accedemos al objeto ventan (la barra de búsqueda del navegador) para escribir el link
+            // el interrogante (?) es importante para que no de indefinido
+            window.location.href = `championsProfile.html?${infoAñadidaURL}`;
+        })
+        
+    });
 })
