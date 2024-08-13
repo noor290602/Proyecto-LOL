@@ -294,13 +294,13 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
 
         if (habilidadPredeterminada) {
             habilidadPredeterminada.querySelector('.selectorItem').classList.add('selectedItem'); //agregamos la clase selectedItem
-            
+
             // Actualizar la información de la habilidad seleccionada
             const habilidad = allSpells.find(spell => spell.id === habilidadPredeterminadaId);
             if (habilidad) {
-                document.getElementById('nombreHabilidad').textContent = habilidad.id;
-                document.getElementById('tituloSubconsejo').textContent = habilidad.nombre;
-                document.getElementById('contenidoSubconsejo').textContent = habilidad.descripcion;
+                document.getElementById('nombreHabilidad').innerHTML = habilidad.id;
+                document.getElementById('tituloSubconsejo').innerHTML = habilidad.nombre;
+                document.getElementById('contenidoSubconsejo').innerHTML = habilidad.descripcion;
             }
         }
 
@@ -331,9 +331,9 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
                 if (habilidad) { //si dicha hablidad existe...
 
                     // Actualizar el ID, nombre y descripción
-                    document.getElementById('nombreHabilidad').textContent = habilidad.id;
-                    document.getElementById('tituloSubconsejo').textContent = habilidad.nombre;
-                    document.getElementById('contenidoSubconsejo').textContent = habilidad.descripcion;
+                    document.getElementById('nombreHabilidad').innerHTML = habilidad.id;
+                    document.getElementById('tituloSubconsejo').innerHTML = habilidad.nombre;
+                    document.getElementById('contenidoSubconsejo').innerHTML = habilidad.descripcion;
 
                     // Quitar la clase 'selectedItem' de todos los contenedores de habilidad
                     document.querySelectorAll('.selectorItem').forEach(item => {
@@ -348,6 +348,9 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
 
 
         //Aspectos -------------------------------------------------------------------------------------------------------------------------------------------
-        //TODO
+        
+        let imagenesSlider = atributosCampeon.skins;
+
+        console.log(skins);
 
     });
