@@ -17,7 +17,7 @@ fetch('https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion.json'
         htmlChampions += '<div class="tarjetaCampeon">';
         htmlChampions += '<div class="marcoImagenCampeon">';
         htmlChampions += `<div class="imagenCampeon" style="background-image: url(${urlImagenChampion}); background-repeat: no-repeat;"></div></div>`;
-        htmlChampions += '<p class="nombreCampeon">' + champion.id + '</p></div></a>';    
+        htmlChampions += '<p class="nombreCampeon">' + champion.name + '</p></div></a>';    
     });
 
     championsContainer.innerHTML = htmlChampions;

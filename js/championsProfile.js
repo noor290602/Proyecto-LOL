@@ -43,7 +43,7 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
 
         let contenidoNombres = "";
 
-        contenidoNombres += `<p class="nombreChampion">${idCampeon.toUpperCase()}</p>
+        contenidoNombres += `<p class="nombreChampion">${atributosCampeon.name.toUpperCase()}</p>
                          <p class="segundoNombreChampion">${atributosCampeon.title}</p>`;
 
         contenedorNombres.innerHTML = contenidoNombres;
@@ -142,9 +142,9 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
             { label: "Velocidad de ataque", base: "attackspeed", perLevel: "attackspeedperlevel" }
         ];
 
-         //Función que calcula el maxLevel y lo redondea a 2 decimales si es el caso
+        //Función que calcula el maxLevel y lo redondea a 2 decimales si es el caso
 
-         const calcularMaxLevel = (base, perLevel, level = 18) => { //level = 18 -> deducción
+        const calcularMaxLevel = (base, perLevel, level = 18) => { //level = 18 -> deducción
 
             const maxLevel = base + (perLevel * level);
 
@@ -159,7 +159,7 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
 
             return maxLevelRounded;
         };
-    
+
         let contenidoTabla = "";
 
         atributosEstadisticas.forEach(atributo => {
@@ -220,8 +220,132 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
 
 
         //Habilidades -------------------------------------------------------------------------------------------------------------------------------------------
-        //TODO 
-        
+
+        //Cargamos las spells y la passive -----------------------
+
+        let spells = atributosCampeon.spells;
+        let pasiva = atributosCampeon.passive;
+
+        // Crear un array que incluya la pasiva con los atributos que nos interesen
+
+        const habilidadPasiva = [
+            {
+                id: "Pasiva",
+                nombre: pasiva.name,
+                descripcion: pasiva.description,
+                imagen: pasiva.image.full
+            }
+        ];
+
+        // Mapear las spells y agregarlas al array habilidades ----------------------
+
+        const habilidades = [];
+
+        spells.forEach(spell => {
+            habilidades.push({
+                id: spell.id,
+                nombre: spell.name,
+                descripcion: spell.description,
+                imagen: spell.image.full
+            });
+        });
+
+
+        // Cargamos las imágenes -----------------------------
+
+        let contenedorImagenes = document.getElementById("contenedorImagenesHabilidades");
+        contenedorImagenes.innerHTML = '';
+
+        let contenidoImagenes = "";
+
+
+        //Cargamos la imagen pasiva ---------------------------
+
+        habilidadPasiva.forEach(spell => {
+            contenidoImagenes = `<div class="contenedorHabilidad" data-id="${spell.id}">
+                                    <div class="imagenHabilidad" style="background-image: url(https://ddragon.leagueoflegends.com/cdn/14.15.1/img/passive/${spell.imagen}); background-repeat: no-repeat;"></div> 
+                                    <div class="selectorItem"></div>
+                                </div>`
+        });
+
+
+        //Cargamos las imagenes del resto de las habilidades ------------------------
+
+        habilidades.forEach(spell => {
+            contenidoImagenes += `<div class="contenedorHabilidad" data-id="${spell.id}">
+                                    <div class="imagenHabilidad" style="background-image: url(https://ddragon.leagueoflegends.com/cdn/14.15.1/img/spell/${spell.imagen}); background-repeat: no-repeat;"></div> 
+                                    <div class="selectorItem"></div>
+                                </div>`;
+        });
+
+        contenedorImagenes.innerHTML = contenidoImagenes;
+
+
+        //Actualizar nombre, titulo y descripcion ---------------------------------
+
+        //Nos guardamos todas las habilidades en un array (passive + spells)
+        const allSpells = habilidadPasiva.concat(habilidades);
+
+        // Habilidad que queremos seleccionada por defecto
+        const habilidadPredeterminadaId = habilidadPasiva[0].id;  
+
+        // Marcar la habilidad predeterminada como seleccionada
+        const habilidadPredeterminada = document.querySelector(`.contenedorHabilidad[data-id="${habilidadPredeterminadaId}"]`);
+
+        if (habilidadPredeterminada) {
+            habilidadPredeterminada.querySelector('.selectorItem').classList.add('selectedItem'); //agregamos la clase selectedItem
+            
+            // Actualizar la información de la habilidad seleccionada
+            const habilidad = allSpells.find(spell => spell.id === habilidadPredeterminadaId);
+            if (habilidad) {
+                document.getElementById('nombreHabilidad').textContent = habilidad.id;
+                document.getElementById('tituloSubconsejo').textContent = habilidad.nombre;
+                document.getElementById('contenidoSubconsejo').textContent = habilidad.descripcion;
+            }
+        }
+
+        // Manejador de eventos para actualizar la información de la habilidad
+        contenedorImagenes.addEventListener('click', (event) => {
+
+            let target = event.target; //target = objetivo del click
+
+            /*
+
+            |-- EXPLICACIÓN: --------------------------------------------------------------------------------------------------------------------------------------------------------|
+            |                                                                                                                                                                        |
+            |           Se empieza desde el objetivo del clic (event.target) y se sube en la jerarquía de elementos hasta encontrar un elemento con la clase contenedorHabilidad     |
+            |                                                                                                                                                                        |
+            |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+            */
+
+            // Si el clic NO fue en una imagenHabilidad, sube a contenedorHabilidad (se va subiendo hasta encontrarla)
+            while (target && !target.classList.contains('contenedorHabilidad')) {
+                target = target.parentElement;
+            }
+
+            // Si el clic SÍ fue en una imagenHabilidad...
+            if (target) {
+                const habilidadId = target.getAttribute('data-id'); //cogemos el id del elemento clicado
+                const habilidad = allSpells.find(spell => spell.id === habilidadId); //buscamos el id en el array allSpells
+                if (habilidad) { //si dicha hablidad existe...
+
+                    // Actualizar el ID, nombre y descripción
+                    document.getElementById('nombreHabilidad').textContent = habilidad.id;
+                    document.getElementById('tituloSubconsejo').textContent = habilidad.nombre;
+                    document.getElementById('contenidoSubconsejo').textContent = habilidad.descripcion;
+
+                    // Quitar la clase 'selectedItem' de todos los contenedores de habilidad
+                    document.querySelectorAll('.selectorItem').forEach(item => {
+                        item.classList.remove('selectedItem');
+                    });
+
+                    // Agregar la clase 'selectedItem' al contenedor de habilidad clicado
+                    target.querySelector('.selectorItem').classList.add('selectedItem');
+                }
+            }
+        });
+
 
         //Aspectos -------------------------------------------------------------------------------------------------------------------------------------------
         //TODO

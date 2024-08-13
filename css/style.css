@@ -370,6 +370,7 @@ input {
 .contenedorMainChampionsProfile {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     width: 100%;
     margin-top: 36px;
 }
@@ -528,9 +529,9 @@ input {
     margin-right: 59px;
 }
 
-.contenidoLore p, .contenidoSubconsejo{
+.contenidoLore p, #contenidoSubconsejo{
     color: rgba(255, 255, 255, 0.845);
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .consejos{
@@ -546,8 +547,8 @@ input {
     gap: 20px;
 }
 
-.tituloSubconsejo{
-    font-size: 16px;
+#tituloSubconsejo{
+    font-size: 18px;
     font-family: "Inter Medium";
     color: white;
 }
@@ -798,7 +799,7 @@ input {
     gap: 50px;
 }
 
-.habilidad {
+.contenedorNombreHabilidad {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -829,11 +830,19 @@ input {
     color: white;
 }
 
-.contenedorImagenesHabilidades {
+#contenedorImagenesHabilidades {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
+}
+
+.imagenHabilidad{
+    width: 112px;
+    height: 112px;
+    background-position: center center;
+    background-size: 80%;
 }
 
 .contenedorHabilidad {
@@ -844,41 +853,6 @@ input {
     width: 112px;
     height: 134px;
     gap: 10px;
-}
-
-.imagenHabilidad1 {
-    background-image: url(../resources/images/habilidad1.jpg);
-    background-size: cover;
-    width: 112px;
-    height: 112px;
-}
-
-.imagenHabilidad2 {
-    background-image: url(../resources/images/habilidad2.jpg);
-    background-size: cover;
-    width: 112px;
-    height: 112px;
-}
-
-.imagenHabilidad3 {
-    background-image: url(../resources/images/habilidad3.jpg);
-    background-size: cover;
-    width: 112px;
-    height: 112px;
-}
-
-.imagenHabilidad4 {
-    background-image: url(../resources/images/habilidad4.jpg);
-    background-size: cover;
-    width: 112px;
-    height: 112px;
-}
-
-.imagenHabilidad5 {
-    background-image: url(../resources/images/habilidad5.jpg);
-    background-size: cover;
-    width: 112px;
-    height: 112px;
 }
 
 .selectorItem{
