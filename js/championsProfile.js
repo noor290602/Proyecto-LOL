@@ -250,10 +250,10 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
             });
         });
 
- 
+
         // Cargamos las imágenes -----------------------------
 
-        let contenedorImagenes = document.getElementsByClassName("contenedorImagenesHabilidades")[0];
+        let contenedorImagenes = document.getElementById("contenedorImagenesHabilidades");
         contenedorImagenes.innerHTML = '';
 
         let contenidoImagenes = "";
@@ -298,9 +298,9 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
             // Actualizar la información de la habilidad seleccionada
             const habilidad = allSpells.find(spell => spell.id === habilidadPredeterminadaId);
             if (habilidad) {
-                document.querySelector('.nombreHabilidad p').textContent = habilidad.id; 
-                document.querySelector('.tituloSubconsejo p').textContent = habilidad.nombre; 
-                document.querySelector('.contenidoSubconsejo p').textContent = habilidad.descripcion; 
+                document.getElementById('nombreHabilidad').textContent = habilidad.id;
+                document.getElementById('tituloSubconsejo').textContent = habilidad.nombre;
+                document.getElementById('contenidoSubconsejo').textContent = habilidad.descripcion;
             }
         }
 
@@ -317,7 +317,7 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
             |                                                                                                                                                                        |
             |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-            */ 
+            */
 
             // Si el clic NO fue en una imagenHabilidad, sube a contenedorHabilidad (se va subiendo hasta encontrarla)
             while (target && !target.classList.contains('contenedorHabilidad')) {
@@ -331,9 +331,9 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
                 if (habilidad) { //si dicha hablidad existe...
 
                     // Actualizar el ID, nombre y descripción
-                    document.querySelector('.nombreHabilidad p').innerText = habilidad.id; 
-                    document.querySelector('.tituloSubconsejo p').innerText = habilidad.nombre;
-                    document.querySelector('.contenidoSubconsejo p').innerText = habilidad.descripcion; 
+                    document.getElementById('nombreHabilidad').textContent = habilidad.id;
+                    document.getElementById('tituloSubconsejo').textContent = habilidad.nombre;
+                    document.getElementById('contenidoSubconsejo').textContent = habilidad.descripcion;
 
                     // Quitar la clase 'selectedItem' de todos los contenedores de habilidad
                     document.querySelectorAll('.selectorItem').forEach(item => {
