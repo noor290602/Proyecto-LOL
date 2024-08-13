@@ -529,7 +529,7 @@ input {
     margin-right: 59px;
 }
 
-.contenidoLore p, #contenidoSubconsejo{
+.contenidoLore p, #contenidoSubconsejo, .contenidoSubconsejo{
     color: rgba(255, 255, 255, 0.845);
     font-size: 14px;
 }
@@ -547,7 +547,7 @@ input {
     gap: 20px;
 }
 
-#tituloSubconsejo{
+#tituloSubconsejo, .tituloSubconsejo{
     font-size: 18px;
     font-family: "Inter Medium";
     color: white;
