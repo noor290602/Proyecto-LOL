@@ -194,13 +194,13 @@
                         <p>ASPECTOS</p>
                     </div>
 
-                    <div class="contenedorAspecto">
-                        <div class="contenedorImagenAspectos">
-                            <img src="resources/svg/menor.svg">
-                            <div class="imagenAspectos"></div>
-                            <img src="resources/svg/mayor.svg">
+                    <div id="contenedorAspecto">
+                        <div id="contenedorSlider">
+                            <img id="prevImage" src="resources/svg/menor.svg">
+                            <div id="contenedorImagenesAspectos"></div>
+                            <img id="nextImage" src="resources/svg/mayor.svg">
                         </div>
-                        <p class="nombreAspecto">Star Guardian Nilah</p>
+                        <div><p id="nombreAspecto">Star Guardian Nilah</p></div>
                     </div>
 
                 </div>
@@ -233,7 +233,7 @@
         </div>
     </footer>
 
-    <script src="js/championsProfile.js"></script>
+    <script src="js/championsProfile.js" defer></script> <!--defer: hasta que no carga todo el HTML no carga el js-->
 </body>
 
 </html>

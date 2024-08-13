@@ -797,6 +797,7 @@ input {
     display: flex;
     flex-direction: column;
     gap: 50px;
+    height: 490px;
 }
 
 .contenedorNombreHabilidad {
@@ -882,7 +883,7 @@ input {
     gap: 50px;
 }
 
-.contenedorAspecto {
+#contenedorAspecto {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -891,21 +892,35 @@ input {
     margin-bottom: 52px;
 }
 
-.contenedorImagenAspectos {
+#contenedorSlider {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-.imagenAspectos {
-    background-image: url(../resources/images/nilahAspectos.jpg);
+#contenedorImagenesAspectos{
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
     background-size: cover;
-    width: 780px;
-    height: 460px;
+    width: 608px;
+    height: 359px;
 }
 
-.nombreAspecto {
+.imagenAspectos {
+    display: none;
+    background-size: cover;
+    width: 608px;
+    height: 359px;
+}
+
+#prevImage, #nextImage {
+    cursor: pointer;
+    user-select: none;
+}
+
+#nombreAspecto {
     font-size: 24px;
     font-weight: bold;
     font-style: italic;

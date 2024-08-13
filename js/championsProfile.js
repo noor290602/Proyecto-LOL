@@ -287,7 +287,7 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
         const allSpells = habilidadPasiva.concat(habilidades);
 
         // Habilidad que queremos seleccionada por defecto
-        const habilidadPredeterminadaId = habilidadPasiva[0].id;  
+        const habilidadPredeterminadaId = habilidadPasiva[0].id;
 
         // Marcar la habilidad predeterminada como seleccionada
         const habilidadPredeterminada = document.querySelector(`.contenedorHabilidad[data-id="${habilidadPredeterminadaId}"]`);
@@ -348,9 +348,52 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
 
 
         //Aspectos -------------------------------------------------------------------------------------------------------------------------------------------
-        
+
+
+        const contenedorImagenesAspectos =  document.getElementById('contenedorImagenesAspectos');
+
+        contenedorImagenesAspectos.innerHTML = "";
+
         let imagenesSlider = atributosCampeon.skins;
 
-        console.log(skins);
+        let contenidoImagenesAspectos = "";
+
+        imagenesSlider.forEach(skin => {
+            urlImagenSkin = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${atributosCampeon.id}_${skin.num}.jpg`;
+
+            contenidoImagenesAspectos += `<div class="imagenAspectos" name ="${skin.name}" style="background-image: url(${urlImagenSkin}); background-repeat: no-repeat;"></div> `;
+
+        });
+
+        contenedorImagenesAspectos.innerHTML = contenidoImagenesAspectos;
+
+
+
+        let skinActual = 0;
+        let arraySkins = document.getElementsByClassName('imagenAspectos');
+        
+
+        function actualizarSkin(skin){
+
+            //Borramos la skin actual al pulsar el botón
+            arraySkins[skinActual].style.display = "none";
+
+            //Guardamos la posición nueva a la que queremos acceder
+            skinActual = (skin + arraySkins.length) % arraySkins.length; //si da 0 es que está dentro del array, si da 1 se ha "sobresalido" del array | tmb es para el slider infinito
+
+            //Mostramos la nueva skin
+            arraySkins[skinActual].style.display = "block";
+
+            //Pintamos el nombre de la imagen
+            document.getElementById('nombreAspecto').innerHTML = arraySkins[skinActual].getAttribute("name");
+        };
+
+        //Inicializamos en la primera skin
+        actualizarSkin(skinActual);
+
+        //Manejamos los botones
+        document.getElementById('prevImage').addEventListener("click", () => actualizarSkin(skinActual + 1));
+        
+        document.getElementById('nextImage').addEventListener("click",  () => actualizarSkin(skinActual - 1))
 
     });
