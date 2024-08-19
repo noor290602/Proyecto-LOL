@@ -307,7 +307,7 @@ input {
     gap: 10px;
 }
 
-.roles, .estadisticas, .ordenar {
+.roles, .estadisticas, .ordenar, #etiquetas {
     display: flex;
     justify-content: space-between;
     padding: 10px;
@@ -927,6 +927,85 @@ input {
     color: white;
 }
 
+/* ITEMS -----------------------------------------------------------------------------------------*/
+
+#filtrosItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    gap: 50px;
+}
+
+#opciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: end;
+    border: 0.25px solid white;
+}
+
+.opcion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 0.25px solid white;
+
+    background-color: #ffffff7b;
+    width: auto;
+    height: auto;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+#tarjetasItems {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto;
+    gap: 20px;
+}
+
+#tarjetasItems a {
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
+.tarjetaItem{
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    height: auto;
+    gap: 5px;
+}
+
+.nombreItems {
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+}
+
+.marcoImagenItems {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    border: 3px solid #C89B3C;
+    border-radius: 20px;
+}
+
+.imagenItems {
+    width: 94px;
+    height: 94px;
+    border-radius: 20px;
+    background-position: center center;
+    background-size: 150%;
+}
 
 /* FOOTER ----------------------------------------------------------------------------------------*/
 
