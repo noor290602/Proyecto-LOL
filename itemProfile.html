@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summoners</title>
+    <title>Item Profile</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -13,8 +13,8 @@
         <nav>
             <ul>
                 <li><a href="champions.html">CHAMPIONS</a></li>
-                <li><a href="items.html">ITEMS</a></li>
-                <li><a class="selected" href="summoners.html">SUMMONERS</a></li>
+                <li><a class="selected" href="items.html">ITEMS</a></li>
+                <li><a href="summoners.html">SUMMONERS</a></li>
                 <li><a href="profilePics.html">PROFILE PICS</a></li>
             </ul>
         </nav>
@@ -23,7 +23,7 @@
             <div class="version">
                 <p>14.14.1</p>
                 <img src="resources/svg/gaming-pad.svg"/>
-                <select class="select" name="ver" id="ver">
+                <select class="select" name="version" id="version">
                     <option>
                         <a href="#"></a>
                     </option>
@@ -33,7 +33,7 @@
             <div class="idioma">
                 <p>es_ES</p>
                 <img src="resources/svg/globe.svg"/>
-                <select class="select" name="ver" id="ver">
+                <select class="select" name="idioma" id="idioma">
                     <option>
                         <a href="#"></a>
                     </option>
@@ -45,12 +45,203 @@
     <main>
         <div class="deco1"></div>
 
-        <div class="contenedorMainGeneral">
+        <div class="contenedorMainProfilePages">
 
-            <div>
-                <p class="tituloPrincipal">ITEM PROFILE</p>
+            <div class="botonVolverChampions">
+                <a href="items.html">
+                    <div class="botonVolver">
+                        <img src="resources/svg/flecha-atras.svg" />
+                        <p>Back to all items</p>
+                    </div>
+                </a>
             </div>
-        
+
+            <div id="main1IP">
+                <div id="imagenIP" style="background-image: url(resources/images/itemPrincipal.png); background-repeat: no-repeat; background-size: cover;"></div>
+                <div id="containerInfoIP">
+                    <p id="nombreItem">Kindlegem</p>
+                    <div id="infoIP">
+                        <div id="descripcionIP">
+                            <p class="tituloDescripcionPrecios">Descripcion</p>
+                            <ul>
+                                <li>
+                                    <p>Increases Health and Cooldown</p>
+                                </li>
+                                <li>
+                                    <p>200 Health</H1></p>
+                                </li>
+                                <li>
+                                    <p>10 Ability Haste</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="preciosIP">
+                            <p class="tituloDescripcionPrecios">Precios</p>
+                            <div class="containerPrecio">
+                                <p>Precio de compra</p>
+                                <div id="monedas1">
+                                    <p>800</p>
+                                    <img src="resources/images/coins.png">
+                                </div>
+                            </div>
+                            <div class="containerPrecio">
+                                <p>Precio de venta</p>
+                                <div id="monedas2">
+                                    <p>560</p>
+                                    <img src="resources/images/coins.png">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+
+            
+            <div id="main2IP">
+                 <!--etiquetas-->
+
+                <div class="seccion">
+                    <p>ETIQUETAS</p>
+                </div>
+
+                 <div id="propiedadesIP">
+                    <div class="propiedadIP">Fighter</div>
+                    <div class="propiedadIP">Assasin</div>
+                    <div class="propiedadIP">Assasin</div>
+                    <div class="propiedadIP">Kind :)</div>
+                </div>
+            </div>
+            <div id="main3IP">
+                <!--objetos necesarios-->
+                <div class="seccion">
+                    <p>OBJETOS NECESARIOS</p>
+                </div>
+
+                <div id="objetosNecesarios">
+                    <a href="itemProfile.html">
+                        <div class="tarjetaItem">
+                            <div class="marcoImagenItems">
+                                <div class="imagenItems" style="background-image: url(resources/images/item6.png); background-repeat: no-repeat;"></div>
+                            </div>
+                            <p class="nombreItems">Botas</p>
+                        </div>
+                    </a>
+                    <a href="itemProfile.html">
+                        <div class="tarjetaItem">
+                            <div class="marcoImagenItems">
+                                <div class="imagenItems" style="background-image: url(resources/images/item6.png); background-repeat: no-repeat;"></div>
+                            </div>
+                            <p class="nombreItems">Botas</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div id="main4IP">
+                <!--mejoras--> 
+                <div class="seccion">
+                    <p>MEJORAS</p>
+                </div>
+
+                <div id="mejoras">
+                    <a href="itemProfile.html">
+                        <div class="tarjetaItem">
+                            <div class="marcoImagenItems">
+                                <div class="imagenItems" style="background-image: url(resources/images/item6.png); background-repeat: no-repeat;"></div>
+                            </div>
+                            <p class="nombreItems">Botas</p>
+                        </div>
+                    </a> 
+                    <a href="itemProfile.html">
+                        <div class="tarjetaItem">
+                            <div class="marcoImagenItems">
+                                <div class="imagenItems" style="background-image: url(resources/images/item6.png); background-repeat: no-repeat;"></div>
+                            </div>
+                            <p class="nombreItems">Botas</p>
+                        </div>
+                    </a>
+                    <a href="itemProfile.html">
+                        <div class="tarjetaItem">
+                            <div class="marcoImagenItems">
+                                <div class="imagenItems" style="background-image: url(resources/images/item6.png); background-repeat: no-repeat;"></div>
+                            </div>
+                            <p class="nombreItems">Botas</p>
+                        </div>
+                    </a> 
+                    <a href="itemProfile.html">
+                        <div class="tarjetaItem">
+                            <div class="marcoImagenItems">
+                                <div class="imagenItems" style="background-image: url(resources/images/item6.png); background-repeat: no-repeat;"></div>
+                            </div>
+                            <p class="nombreItems">Botas</p>
+                        </div>
+                    </a>  
+                    <a href="itemProfile.html">
+                        <div class="tarjetaItem">
+                            <div class="marcoImagenItems">
+                                <div class="imagenItems" style="background-image: url(resources/images/item6.png); background-repeat: no-repeat;"></div>
+                            </div>
+                            <p class="nombreItems">Botas</p>
+                        </div>
+                    </a> 
+                    <a href="itemProfile.html">
+                        <div class="tarjetaItem">
+                            <div class="marcoImagenItems">
+                                <div class="imagenItems" style="background-image: url(resources/images/item6.png); background-repeat: no-repeat;"></div>
+                            </div>
+                            <p class="nombreItems">Botas</p>
+                        </div>
+                    </a>  
+                    <a href="itemProfile.html">
+                        <div class="tarjetaItem">
+                            <div class="marcoImagenItems">
+                                <div class="imagenItems" style="background-image: url(resources/images/item6.png); background-repeat: no-repeat;"></div>
+                            </div>
+                            <p class="nombreItems">Botas</p>
+                        </div>
+                    </a> 
+                    <a href="itemProfile.html">
+                        <div class="tarjetaItem">
+                            <div class="marcoImagenItems">
+                                <div class="imagenItems" style="background-image: url(resources/images/item6.png); background-repeat: no-repeat;"></div>
+                            </div>
+                            <p class="nombreItems">Botas</p>
+                        </div>
+                    </a>  
+                    <a href="itemProfile.html">
+                        <div class="tarjetaItem">
+                            <div class="marcoImagenItems">
+                                <div class="imagenItems" style="background-image: url(resources/images/item6.png); background-repeat: no-repeat;"></div>
+                            </div>
+                            <p class="nombreItems">Botas</p>
+                        </div>
+                    </a> 
+                    <a href="itemProfile.html">
+                        <div class="tarjetaItem">
+                            <div class="marcoImagenItems">
+                                <div class="imagenItems" style="background-image: url(resources/images/item6.png); background-repeat: no-repeat;"></div>
+                            </div>
+                            <p class="nombreItems">Botas</p>
+                        </div>
+                    </a>  
+                    <a href="itemProfile.html">
+                        <div class="tarjetaItem">
+                            <div class="marcoImagenItems">
+                                <div class="imagenItems" style="background-image: url(resources/images/item6.png); background-repeat: no-repeat;"></div>
+                            </div>
+                            <p class="nombreItems">Botas</p>
+                        </div>
+                    </a> 
+                    <a href="itemProfile.html">
+                        <div class="tarjetaItem">
+                            <div class="marcoImagenItems">
+                                <div class="imagenItems" style="background-image: url(resources/images/item6.png); background-repeat: no-repeat;"></div>
+                            </div>
+                            <p class="nombreItems">Botas</p>
+                        </div>
+                    </a>           
+                </div>
+            </div>
         </div>
         <div class="deco2"></div>
     </main>
@@ -75,5 +266,6 @@
             <img src="resources/images/legal-logo.png"/>
         </div>
     </footer>
+    <script src="js/itemProfile.js" defer></script>
 </body>
 </html>

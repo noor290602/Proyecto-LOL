@@ -25,12 +25,12 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
         let etiquetaPropiedad = "";
 
         etiquetas.forEach(etiqueta => {
-            etiquetaPropiedad += `<div class="propiedad">${etiqueta}</div>`;
+            etiquetaPropiedad += `<div class="propiedadCP">${etiqueta}</div>`;
         });
 
         let contenidoPropiedades = "";
 
-        contenidoPropiedades += `<div class="propiedades">
+        contenidoPropiedades += `<div class="propiedadesCP">
                                 ${etiquetaPropiedad}
                               </div>`;
 
@@ -281,7 +281,7 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
         contenedorImagenes.innerHTML = contenidoImagenes;
 
 
-        //Actualizar nombre, titulo y descripcion ---------------------------------
+        //Actualizar nombre, titulo y descripcion ----------------------------------
 
         //Nos guardamos todas las habilidades en un array (passive + spells)
         const allSpells = habilidadPasiva.concat(habilidades);
@@ -293,7 +293,7 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
         const habilidadPredeterminada = document.querySelector(`.contenedorHabilidad[data-id="${habilidadPredeterminadaId}"]`);
 
         if (habilidadPredeterminada) {
-            habilidadPredeterminada.querySelector('.selectorItem').classList.add('selectedItem'); //agregamos la clase selectedItem
+            habilidadPredeterminada.querySelector('.selectorItem').classList.add('selectedItem'); //agregamos la clase selectedItem. classList-> mira
 
             // Actualizar la información de la habilidad seleccionada
             const habilidad = allSpells.find(spell => spell.id === habilidadPredeterminadaId);
