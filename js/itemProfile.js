@@ -12,8 +12,6 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.16.1/data/en_US/item.json`) //
         valuesItems = Object.values(items);
         keysItems = Object.keys(items);
 
-        console.log(entriesItems);
-
         let actualItem = "";
 
         entriesItems.forEach(([key, item]) => {
@@ -75,8 +73,6 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.16.1/data/en_US/item.json`) //
     let priceBase = actualItem.gold.base;
     let priceTotal = actualItem.gold.total;
     let comprable = actualItem.gold.purchasable;
-
-    console.log(comprable);
 
     let precioVenta = document.querySelector("#monedas1 p");
     let precioCompra = document.querySelector("#monedas2 p");
