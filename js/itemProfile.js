@@ -12,8 +12,6 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.16.1/data/en_US/item.json`) //
         valuesItems = Object.values(items);
         keysItems = Object.keys(items);
 
-        console.log(entriesItems);
-
         let actualItem = "";
 
         entriesItems.forEach(([key, item]) => {
@@ -67,14 +65,30 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.16.1/data/en_US/item.json`) //
 
     //Precios item --------------------------------------------------------------------------------------------------------------------------------------------------
 
+    let precios = document.querySelector("#preciosIP");
+    let contenidoPrecios = `<p class="tituloDescripcionPrecios">Precios</p> <p id="mensajeSinPrecios">Este item no se puede ni comprar ni vender</p>`;
+  
+
     let priceSell = actualItem.gold.sell;
+    let priceBase = actualItem.gold.base;
     let priceTotal = actualItem.gold.total;
+    let comprable = actualItem.gold.purchasable;
 
-    let precioCompra = document.querySelector("#monedas1 p");
-    let precioVenta = document.querySelector("#monedas2 p");
+    let precioVenta = document.querySelector("#monedas1 p");
+    let precioCompra = document.querySelector("#monedas2 p");
+    let precioTotal= document.querySelector("#monedas3 p");
 
-    precioCompra.innerHTML = priceSell;
-    precioVenta.innerHTML = priceTotal;
+    if(comprable){
+        precioVenta.innerHTML = priceBase;
+        precioCompra.innerHTML = priceSell;
+        precioTotal.innerHTML = priceTotal;
+
+    }else{
+        precios.innerHTML = "";
+        precios.innerHTML = contenidoPrecios;
+    }
+
+  
 
 
     //Etiquetas item ------------------------------------------------------------------------------------------------------------------------------------------------

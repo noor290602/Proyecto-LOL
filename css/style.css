@@ -944,6 +944,7 @@ input {
     justify-content: center;
     align-items: end;
     border: 0.25px solid white;
+    user-select: none;
 }
 
 .opcion {
@@ -962,6 +963,7 @@ input {
     color: white;
     font-size: 16px;
     font-weight: bold;
+    user-select: none;
 }
 
 
@@ -1037,9 +1039,11 @@ input {
 #infoIP{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     padding-top: 50px;
     padding-bottom: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
 
     width: 700px;
     height: auto;
@@ -1056,8 +1060,10 @@ input {
 #descripcionIP{
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     gap: 30px;
     width: 320px;
+    padding-right: 80px;
 
     ul{
         display: flex;
@@ -1084,7 +1090,16 @@ input {
 #preciosIP{
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     gap: 30px;
+    width: 200px;
+}
+
+#mensajeSinPrecios{
+    font-family: "Inter Medium";
+    text-align: center;
+    font-size: 14px;
+    color: white;
 }
 
 .containerPrecio{
@@ -1098,7 +1113,7 @@ input {
         color: white;
     }
     
-    #monedas1, #monedas2{
+    #monedas1, #monedas2, #monedas3{
         display: flex;
         flex-direction: row;
         gap: 3px;
@@ -1108,7 +1123,7 @@ input {
             font-size: 20px;
             color: white;
         }
-    }
+    } 
 }
 
 #main2IP, #main3IP, #main4IP{
@@ -1149,6 +1164,56 @@ input {
     font-family: "Inter Medium";
     font-size: 16px;
     color: white;
+}
+
+/* PROFILE PICS ----------------------------------------------------------------------------------*/
+
+#profilePics{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.tarjetaPP{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    gap: 5px;
+}
+
+.tarjetaPP:hover{
+    transform: scale(1.5);
+    z-index: 10;
+}
+
+.marcoImagenPP {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #C89B3C;
+    border-radius: 20px;
+}
+
+.imagenPP {
+    width: 48px;
+    height: 48px;
+    border-radius: 20px;
+    background-position: center center;
+    background-size: 100%;
+}
+
+#paginacion{
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+    user-select: none;
+
+    img{
+        height: 40px;
+    }
 }
 
 /* FOOTER ----------------------------------------------------------------------------------------*/
