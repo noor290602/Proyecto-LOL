@@ -391,9 +391,9 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
         //Inicializamos en la primera skin
         actualizarSkin(skinActual);
 
-        //Manejamos los botones
-        document.getElementById('prevImage').addEventListener("click", () => actualizarSkin(skinActual + 1));
+         //Manejamos los botones
+         document.getElementById('prevImage').addEventListener("click", () => actualizarSkin(skinActual + 1));
         
-        document.getElementById('nextImage').addEventListener("click",  () => actualizarSkin(skinActual - 1))
+         document.getElementById('nextImage').addEventListener("click",  () => actualizarSkin(skinActual - 1));
 
     });

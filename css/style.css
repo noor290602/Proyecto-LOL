@@ -7,6 +7,10 @@
     font-family: "Inter";
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 /* FUENTES ---------------------------------------------------------------------------------------*/
 
 @font-face {
@@ -77,7 +81,7 @@ body{
     background: linear-gradient(to bottom, rgba(2,0,36) 0%, rgba(40,81,163) 100%);
 }
 
-header{
+.headerGeneral{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -143,6 +147,21 @@ nav ul li a{
     justify-content: space-between;
     margin-right: 21px;
     gap: 20px;
+}
+
+.flechaScroll {
+    position: fixed;
+    bottom: 100px;
+    right: 50px;
+    padding: 30px 30px;
+    cursor: pointer;
+    transform: translateY(100px);
+    transition: 0.3s;
+    user-select: none;
+}
+
+.flechaScroll-on {
+    transform: translateY(0);
 }
 
 /* HOME MAIN -------------------------------------------------------------------------------------*/
@@ -310,6 +329,7 @@ input {
 .roles, .estadisticas, .ordenar, #etiquetas {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.48);
     border-radius: 36px;
@@ -942,7 +962,7 @@ input {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: end;
+    align-items: center;
     border: 0.25px solid white;
     user-select: none;
 }
@@ -951,10 +971,10 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
     border: 0.25px solid white;
 
     background-color: #ffffff7b;
@@ -1086,7 +1106,7 @@ input {
         }
     }
 }
-
+ 
 #preciosIP{
     display: flex;
     flex-direction: column;
@@ -1191,23 +1211,17 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border: 3px solid #C89B3C;
-    border-radius: 20px;
-}
-
-.imagenPP {
-    width: 48px;
-    height: 48px;
-    border-radius: 20px;
-    background-position: center center;
-    background-size: 100%;
+    border-radius: 5px;
 }
 
 #paginacion{
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     margin-top: 50px;
     user-select: none;
 
@@ -1216,12 +1230,17 @@ input {
     }
 }
 
+.pagActual{
+    background-color: transparent;
+}
+
 /* FOOTER ----------------------------------------------------------------------------------------*/
 
 footer {
     position: relative;
     background-color: #000000a2;
     padding: 20px;
+    z-index: 10;
 }
 
 .footer1 {
