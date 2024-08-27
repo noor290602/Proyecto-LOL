@@ -3,7 +3,12 @@ const profilePicsAMostrarPorPagina = 40; // Número de imágenes por página
 let pagActual = parseInt(urlPagina) || 1;
 let arrayProfilePics = [];
 
-fetch('https://ddragon.leagueoflegends.com/cdn/14.16.1/data/en_US/profileicon.json')
+//Paso de variables a traves de localStorage
+let storage = window.localStorage;
+let version = storage.getItem("version");
+let idioma = storage.getItem("idioma");
+
+fetch(`https://ddragon.leagueoflegends.com/cdn/${version}/data/${idioma}/profileicon.json`)
     .then(response => response.json())
     .then((response) => {
         const profilePics = response.data;
@@ -24,7 +29,7 @@ function muestraPP(pagina) {
     let htmlProfilePics = '';
 
     arrayProfilePicsPartido.forEach(profilePic => {
-        let urlSpriteProfilePics = `https://ddragon.leagueoflegends.com/cdn/14.16.1/img/sprite/${profilePic.image.sprite}`;
+        let urlSpriteProfilePics = `https://ddragon.leagueoflegends.com/cdn/${version}/img/sprite/${profilePic.image.sprite}`;
 
         htmlProfilePics += `<div class="tarjetaPP">
                                 <div class="marcoImagenPP">

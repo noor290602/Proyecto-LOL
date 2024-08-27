@@ -1,6 +1,9 @@
-/* FETCH -> sirve para hacer la llamada a la API*/
+//Paso de variables a traves de localStorage
+let storage = window.localStorage;
+let version = storage.getItem("version");
+let idioma = storage.getItem("idioma");
 
-fetch('https://ddragon.leagueoflegends.com/cdn/14.16.1/data/en_US/item.json') // + adelante cambiar idioma y version por variables
+fetch(`https://ddragon.leagueoflegends.com/cdn/${version}/data/${idioma}/item.json`) 
 .then(response => response.json())
 .then((response) => {
     const json = response;
@@ -11,7 +14,7 @@ fetch('https://ddragon.leagueoflegends.com/cdn/14.16.1/data/en_US/item.json') //
     let htmlChampions = '';
 
     Object.entries(items).forEach(([key, item]) => {
-        let urlImagenItem = `https://ddragon.leagueoflegends.com/cdn/14.16.1/img/item/${item.image.full}`;
+        let urlImagenItem = `https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image.full}`;
 
         htmlChampions += `<a href="itemProfile.html?id=${key}">`; //forma de pasar variables por una URL -> ?id=
         htmlChampions += '<div class="tarjetaItem">';
@@ -22,3 +25,4 @@ fetch('https://ddragon.leagueoflegends.com/cdn/14.16.1/data/en_US/item.json') //
 
     itemsContainer.innerHTML = htmlChampions;
 })
+

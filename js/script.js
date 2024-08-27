@@ -1,75 +1,63 @@
-// FLECHA SCROLL -----------------------------------------------------------------
+// VERSIONS --------------------------------------------------------------------------
 
-const btnScroll = document.getElementsByClassName("flechaScroll")[0];
-const footer = document.querySelector("footer");
+const contenedorVersiones = document.getElementById("menuVersiones");
+let contenidoSelectVersiones = "";
 
-btnScroll.addEventListener('click', () => {
-    window.scrollTo(0, 0);
-});
-
-window.onscroll = () => {
-    addBtnScroll();
-};
-
-const addBtnScroll = () => {
-    const footerTop = footer.getBoundingClientRect().top; //distancia desde la parte superior del viewport (la ventana visible del navegador) hasta la parte superior del footer
-    const btnScrollBottom = btnScroll.getBoundingClientRect().bottom; //distancia desde la parte superior del viewport hasta la parte inferior del botón.
-    const windowHeight = window.innerHeight; //altura total de la ventana del navegador
-
-    if (window.scrollY < 50) {
-        btnScroll.classList.remove('flechaScroll-on');
-    } else {
-        btnScroll.classList.add('flechaScroll-on');
-    }
-
-    // Ocultar el botón si está demasiado cerca del footer
-    if (footerTop < windowHeight) { 
-        btnScroll.style.opacity = '0';
-    } else {
-        btnScroll.style.opacity = '1';
-    }
-}
-
-/*
-//VERSIONS --------------------------------------------------------------------------
-
-let versiones;
-
-
-fetch('https://ddragon.leagueoflegends.com/api/versions.json') // + adelante cambiar idioma y version por variables
+fetch('https://ddragon.leagueoflegends.com/api/versions.json') 
     .then(response => response.json())
-    .then((response) => {
-        const json = response;
-        const versiones = json.data;
+    .then((versiones) => {
+        
+        versiones.forEach(version => {
+            if (localStorage.version != null){ //comprobamos que tenga datos
+                if(localStorage.version == version){ //comprobamos que sea el mismo
+                    contenidoSelectVersiones += `<option value="${version}" selected>${version}</option> <img src="resources/svg/gaming-pad.svg"/>`;
+                    return //salir del if
+                }
+            }
 
+           contenidoSelectVersiones += `<option value="${version}">${version}</option> <img src="resources/svg/gaming-pad.svg"/>`;
+        });
 
-    versiones.forEach(version => {
-        const option = document.createElement('option');
-        option.value = version.id;
-        option.textContent = version.nombre;
-        select.appendChild(option);
+        contenedorVersiones.innerHTML = contenidoSelectVersiones;
+ })
 
-    });
+contenedorVersiones.addEventListener("change", guardarSelectVersion); //escucha el select de versiones
+
+//IDIOMAS --------------------------------------------------------------------------
+
+const contenedorIdiomas = document.getElementById("menuIdiomas");
+let contenidoSelectIdiomas = "";
+
+contenedorIdiomas.addEventListener("change", guardarSelectIdioma); //escucha el select de idiomas
+
+fetch('https://ddragon.leagueoflegends.com/cdn/languages.json') 
+    .then(response => response.json())
+    .then((idiomas) => {
+        
+        idiomas.forEach(idioma => {
+            if (localStorage.idioma != null){ //comprobamos que tenga datos
+                if(localStorage.idioma == idioma){ //comprobamos que sea el mismo
+                    contenidoSelectIdiomas += `<option value="${idioma}" selected>${idioma}</option> <img src="resources/svg/gaming-pad.svg"/>`;
+                    return //salir del if
+                }
+            }
+            contenidoSelectIdiomas += `<option value="${idioma}">${idioma}</option>`;
+         });
+
+         contenedorIdiomas.innerHTML = contenidoSelectIdiomas;
 })
 
 
-const contenedor = document.getElementById('contenedor-menu-versiones');
-if (contenedor) {
-    contenedor.appendChild(select);
+ function guardarSelectVersion(event) {
+    // Para ver el evento
+    // debugger;
+    // console.log(event);
+    //version = event.target;
+    localStorage.setItem("version", event.target.value);
+    location.reload();
 }
 
-// Agregar evento de cambio
-select.addEventListener('change', function() {
-    localStorage.setItem('versionSeleccionada', this.value);
-});
-
-// Cargar selección guardada
-const versionSeleccionada = localStorage.getItem('versionSeleccionada');
-if (versionSeleccionada) {
-    select.value = versionSeleccionada;
+function guardarSelectIdioma(event) {
+    localStorage.setItem("idioma", event.target.value);
+    location.reload();
 }
-
-
-// Ejecutar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', cargarVersiones);
-*/

@@ -120,7 +120,7 @@ nav ul li a{
     text-underline-offset: 5px; /* Separación de la palabra */
 }
 
-.version, .idioma{
+#version, #idioma{
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -131,18 +131,34 @@ nav ul li a{
     height: 31px;
     padding: 10px;
 
-    font-weight: bold; 
-    color:#C89B3C; 
-    font-size: 18px;
+    
 }
 
-.version select, .idioma select {
+#version select, #idioma select {
+
     background-color: transparent;
     color: #C89B3C;
     border-style: none;
+
+    font-weight: bold; 
+    color:#C89B3C; 
+    font-size: 16px;
+
+    option {
+        font-weight: bold; 
+        color:#C89B3C; 
+        font-size: 16px;
+        background-color: #0A1428;
+    }
 }
 
-.opcionesMenu {
+#version select option:focus, #idioma select option:focus {
+    position: relative;
+    top: 1000px;
+}
+
+
+#opcionesMenu {
     display: flex;
     justify-content: space-between;
     margin-right: 21px;
