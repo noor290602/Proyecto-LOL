@@ -515,7 +515,7 @@ input {
     margin-bottom: 52px;
 }
 
-.nombreChampion, #nombreItem {
+.nombreChampion, #nombreItem{
     color: white;
     font-size: 60px;
     font-family: "Inter Black";
@@ -964,7 +964,7 @@ input {
     color: white;
 }
 
-/* ITEMS -----------------------------------------------------------------------------------------*/
+/* ITEMS & SUMMONERS -----------------------------------------------------------------------------*/
 
 #filtrosItem {
     display: flex;
@@ -1003,7 +1003,7 @@ input {
 }
 
 
-#tarjetasItems {
+#tarjetasItems, #tarjetasSummoners {
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto auto;
     gap: 20px;
@@ -1014,7 +1014,7 @@ input {
     text-decoration-line: none;
 }
 
-.tarjetaItem{
+.tarjetaItem, .tarjetaSummoner{
     display: flex;
     flex-direction: column;
     width: 100px;
@@ -1022,13 +1022,13 @@ input {
     gap: 5px;
 }
 
-.nombreItems {
+.nombreItems, .nombreSummoner{
     font-size: 12px;
     font-weight: bold;
     color: white;
 }
 
-.marcoImagenItems {
+.marcoImagenItems, .marcoImagenSummoner {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1038,7 +1038,7 @@ input {
     border-radius: 20px;
 }
 
-.imagenItems {
+.imagenItems, .imagenSummoner {
     width: 94px;
     height: 94px;
     border-radius: 20px;
