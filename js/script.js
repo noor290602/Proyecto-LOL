@@ -7,7 +7,7 @@ let contenidoSelectVersiones = "";
 // Función para establecer la última version por defecto
 
 function versionPorDefecto(arrayVersiones) {
-    localStorage.removeItem("version");
+    
     if (!localStorage.getItem("version")) {
         localStorage.setItem("version", arrayVersiones[0]);
     }
@@ -43,7 +43,6 @@ let contenidoSelectIdiomas = "";
 
 // Función para establecer un idioma por defecto
 function idiomaPorDefecto() {
-    localStorage.removeItem("idioma");
 
     if (!localStorage.getItem("idioma")) {
         localStorage.setItem("idioma", "es_ES"); 
@@ -72,12 +71,9 @@ fetch('https://ddragon.leagueoflegends.com/cdn/languages.json')
 })
 
 
-function guardarSelectVersion(event) {
-    // Para ver el evento
-    // debugger;
-    // console.log(event);
-    //version = event.target;
+// Funciones para guardar los selects -----------------------------------------------------------------------------------
 
+function guardarSelectVersion(event) {
     if (localStorage == null){
         localStorage.setItem("version", event.target.arrayVersiones[0])
     } else {
@@ -91,3 +87,9 @@ function guardarSelectIdioma(event) {
     localStorage.setItem("idioma", event.target.value);
     location.reload();
 }
+
+// NOTAS ------------------------
+ // Para ver el evento:
+    // debugger;
+    // console.log(event);
+    //version = event.target;
