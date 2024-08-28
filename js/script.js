@@ -3,10 +3,24 @@
 const contenedorVersiones = document.getElementById("menuVersiones");
 let contenidoSelectVersiones = "";
 
+
+// Función para establecer la última version por defecto
+
+function versionPorDefecto(arrayVersiones) {
+    localStorage.removeItem("version");
+    if (!localStorage.getItem("version")) {
+        localStorage.setItem("version", arrayVersiones[0]);
+    }
+}
+
+contenedorVersiones.addEventListener("change", guardarSelectVersion); //escucha el select de versiones
+
 fetch('https://ddragon.leagueoflegends.com/api/versions.json') 
     .then(response => response.json())
     .then((versiones) => {
-        
+
+        versionPorDefecto(versiones);
+
         versiones.forEach(version => {
             if (localStorage.version != null){ //comprobamos que tenga datos
                 if(localStorage.version == version){ //comprobamos que sea el mismo
@@ -21,12 +35,20 @@ fetch('https://ddragon.leagueoflegends.com/api/versions.json')
         contenedorVersiones.innerHTML = contenidoSelectVersiones;
  })
 
-contenedorVersiones.addEventListener("change", guardarSelectVersion); //escucha el select de versiones
 
 //IDIOMAS --------------------------------------------------------------------------
 
 const contenedorIdiomas = document.getElementById("menuIdiomas");
 let contenidoSelectIdiomas = "";
+
+// Función para establecer un idioma por defecto
+function idiomaPorDefecto() {
+    localStorage.removeItem("idioma");
+
+    if (!localStorage.getItem("idioma")) {
+        localStorage.setItem("idioma", "es_ES"); 
+    }
+}
 
 contenedorIdiomas.addEventListener("change", guardarSelectIdioma); //escucha el select de idiomas
 
@@ -34,6 +56,8 @@ fetch('https://ddragon.leagueoflegends.com/cdn/languages.json')
     .then(response => response.json())
     .then((idiomas) => {
         
+        idiomaPorDefecto();
+
         idiomas.forEach(idioma => {
             if (localStorage.idioma != null){ //comprobamos que tenga datos
                 if(localStorage.idioma == idioma){ //comprobamos que sea el mismo
@@ -48,12 +72,18 @@ fetch('https://ddragon.leagueoflegends.com/cdn/languages.json')
 })
 
 
- function guardarSelectVersion(event) {
+function guardarSelectVersion(event) {
     // Para ver el evento
     // debugger;
     // console.log(event);
     //version = event.target;
-    localStorage.setItem("version", event.target.value);
+
+    if (localStorage == null){
+        localStorage.setItem("version", event.target.arrayVersiones[0])
+    } else {
+        localStorage.setItem("version", event.target.value);
+    }
+    
     location.reload();
 }
 
