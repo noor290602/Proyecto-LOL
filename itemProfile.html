@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
+    <header class="headerGeneral">
         <a href="home.html" ><img class="logo" src="resources/images/logo lol.png" width="207px" height="91px"/></a>
         
         <nav>
@@ -18,25 +18,18 @@
                 <li><a href="profilePics.html">PROFILE PICS</a></li>
             </ul>
         </nav>
-
-        <div class="opcionesMenu">
-            <div class="version">
-                <p>14.14.1</p>
+        <div id="opcionesMenu">
+            <div id="version">
                 <img src="resources/svg/gaming-pad.svg"/>
-                <select class="select" name="version" id="version">
-                    <option>
-                        <a href="#"></a>
-                    </option>
+                <select class="select" name="version" id="menuVersiones">
+                    
                 </select>
             </div>
 
-            <div class="idioma">
-                <p>es_ES</p>
+            <div id="idioma">
                 <img src="resources/svg/globe.svg"/>
-                <select class="select" name="idioma" id="idioma">
-                    <option>
-                        <a href="#"></a>
-                    </option>
+                <select class="select" name="idioma" id="menuIdiomas">
+                    
                 </select>
             </div>
         </div>
@@ -249,6 +242,8 @@
                     </a>           
                 </div>
             </div>
+
+            <div class="flechaScroll"><img src="resources/svg/flechaScroll.svg" /></div>
         </div>
         <div class="deco2"></div>
     </main>
@@ -273,6 +268,9 @@
             <img src="resources/images/legal-logo.png"/>
         </div>
     </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/flechaScroll.js"></script>
     <script src="js/itemProfile.js" defer></script>
 </body>
 </html>

@@ -2,8 +2,13 @@
 const urlCampeon = new URLSearchParams(window.location.search);
 const idCampeon = urlCampeon.get("id");
 
+//Paso de variables a traves de localStorage
+let storage = window.localStorage;
+let version = storage.getItem("version");
+let idioma = storage.getItem("idioma");
 
-fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idCampeon}.json`) // + adelante cambiar idioma y version por variables
+
+fetch(`https://ddragon.leagueoflegends.com/cdn/${version}/data/${idioma}/champion/${idCampeon}.json`) // + adelante cambiar idioma y version por variables
     .then(response => response.json())
     .then((response) => {
         const json = response;
@@ -263,7 +268,7 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
 
         habilidadPasiva.forEach(spell => {
             contenidoImagenes = `<div class="contenedorHabilidad" data-id="${spell.id}">
-                                    <div class="imagenHabilidad" style="background-image: url(https://ddragon.leagueoflegends.com/cdn/14.15.1/img/passive/${spell.imagen}); background-repeat: no-repeat;"></div> 
+                                    <div class="imagenHabilidad" style="background-image: url(https://ddragon.leagueoflegends.com/cdn/${version}/img/passive/${spell.imagen}); background-repeat: no-repeat;"></div> 
                                     <div class="selectorItem"></div>
                                 </div>`
         });
@@ -273,7 +278,7 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
 
         habilidades.forEach(spell => {
             contenidoImagenes += `<div class="contenedorHabilidad" data-id="${spell.id}">
-                                    <div class="imagenHabilidad" style="background-image: url(https://ddragon.leagueoflegends.com/cdn/14.15.1/img/spell/${spell.imagen}); background-repeat: no-repeat;"></div> 
+                                    <div class="imagenHabilidad" style="background-image: url(https://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${spell.imagen}); background-repeat: no-repeat;"></div> 
                                     <div class="selectorItem"></div>
                                 </div>`;
         });
@@ -391,9 +396,9 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion/${idC
         //Inicializamos en la primera skin
         actualizarSkin(skinActual);
 
-        //Manejamos los botones
-        document.getElementById('prevImage').addEventListener("click", () => actualizarSkin(skinActual + 1));
+         //Manejamos los botones
+         document.getElementById('prevImage').addEventListener("click", () => actualizarSkin(skinActual + 1));
         
-        document.getElementById('nextImage').addEventListener("click",  () => actualizarSkin(skinActual - 1))
+         document.getElementById('nextImage').addEventListener("click",  () => actualizarSkin(skinActual - 1));
 
     });

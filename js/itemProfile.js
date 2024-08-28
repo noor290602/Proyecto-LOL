@@ -2,7 +2,12 @@
 const urlCampeon = new URLSearchParams(window.location.search);
 const idItem = urlCampeon.get("id");
 
-fetch(`https://ddragon.leagueoflegends.com/cdn/14.16.1/data/en_US/item.json`) // + adelante cambiar idioma y version por variables
+//Paso de variables a traves de localStorage
+let storage = window.localStorage;
+let version = storage.getItem("version");
+let idioma = storage.getItem("idioma");
+
+fetch(`https://ddragon.leagueoflegends.com/cdn/${version}/data/${idioma}/item.json`) // + adelante cambiar idioma y version por variables
     .then(response => response.json())
     .then((response) => {
         const json = response;
@@ -25,7 +30,7 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.16.1/data/en_US/item.json`) //
 
     let imagenIP = document.getElementById("imagenIP");
 
-    urlItem = `url('https://ddragon.leagueoflegends.com/cdn/14.16.1/img/item/${idItem}.png')`;
+    urlItem = `url('https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${idItem}.png')`;
 
     imagenIP.style.backgroundImage = urlItem;
 
@@ -88,8 +93,6 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.16.1/data/en_US/item.json`) //
         precios.innerHTML = contenidoPrecios;
     }
 
-  
-
 
     //Etiquetas item ------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -98,9 +101,15 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.16.1/data/en_US/item.json`) //
 
     let contenidoItemTags = "";
 
-    actualItem.tags.forEach(tag => {
+    let etiquetas = actualItem.tags;
+
+    if (etiquetas.length !== 0) {
+        etiquetas.forEach(tag => {
         contenidoItemTags += `<div class="propiedadIP">${tag}</div>`;
     });
+    } else{
+        contenidoItemTags = "<p class='mensajeNoItems'>Este objeto no tiene etiquetas</p>";
+    }
 
     etiquetasItem.innerHTML = contenidoItemTags;
 
@@ -132,7 +141,7 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.16.1/data/en_US/item.json`) //
             contenidoObjetosNecesarios += `  <a href="itemProfile.html?id=${key}">
                                                 <div class="tarjetaItem">
                                                     <div class="marcoImagenItems">
-                                                        <div class="imagenItems" style="background-image: url('https://ddragon.leagueoflegends.com/cdn/14.16.1/img/item/${key}.png'); background-repeat: no-repeat;"></div>
+                                                        <div class="imagenItems" style="background-image: url('https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${key}.png'); background-repeat: no-repeat;"></div>
                                                     </div>
                                                     <p class="nombreItems">${item.name}</p>
                                                 </div>
@@ -171,7 +180,7 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/14.16.1/data/en_US/item.json`) //
             contenidoMejoras += `  <a href="itemProfile.html?id=${key}">
                                                 <div class="tarjetaItem">
                                                     <div class="marcoImagenItems">
-                                                        <div class="imagenItems" style="background-image: url('https://ddragon.leagueoflegends.com/cdn/14.16.1/img/item/${key}.png'); background-repeat: no-repeat;"></div>
+                                                        <div class="imagenItems" style="background-image: url('https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${key}.png'); background-repeat: no-repeat;"></div>
                                                     </div>
                                                     <p class="nombreItems">${item.name}</p>
                                                 </div>

@@ -1,24 +1,65 @@
-/* FETCH -> sirve para hacer la llamada a la API*/
+//Paso de variables a traves de localStorage
+let storage = window.localStorage;
+let version = storage.getItem("version");
+let idioma = storage.getItem("idioma");
+let championsSinFiltrar = [];
+let textoBuscado = ""; //variable global
 
-fetch('https://ddragon.leagueoflegends.com/cdn/14.15.1/data/en_US/champion.json') // + adelante cambiar idioma y version por variables
+fetch(`https://ddragon.leagueoflegends.com/cdn/${version}/data/${idioma}/champion.json`) 
 .then(response => response.json())
 .then((response) => {
     const json = response;
     const champions = json.data;
+    championsSinFiltrar = Object.values(champions);
+
+    //Buscador --------------------------------------------------------------------------------------
+   
+    let inputBuscador = document.getElementById("buscador"); //valor que escribe el user
+
+    inputBuscador.addEventListener("input", () => {
+        textoBuscado = inputBuscador.value.toLowerCase();
+        mostrarCampeones();
+    })
+
+    //Borrar buscador --------------------------------------------------------------------------------------
+    let btnBorrar = document.getElementById("btnBorrar"); 
+
+    function limpiar() {
+        let inputBuscador = document.getElementById("buscador");
+        inputBuscador.value = ""; // Cambia innerContent por value
+        inputBuscador.dispatchEvent(new Event('input')); // Dispara el evento input
+    }
+
+    btnBorrar.addEventListener("click", limpiar);
+
+    mostrarCampeones();
+})
+
+function mostrarCampeones(){
+    let championsFiltrados = championsSinFiltrar;
+
+    if (textoBuscado.length > 0){
+        championsFiltrados = championsFiltrados.filter((champion) => champion.name.toLowerCase().includes(textoBuscado));
+    }
 
     const championsContainer = document.getElementsByClassName('tarjetasChampions')[0];
     championsContainer.innerHTML = '';
     let htmlChampions = '';
 
-    Object.values(champions).forEach(champion => {
-        let urlImagenChampion = `https://ddragon.leagueoflegends.com/cdn/14.15.1/img/champion/${champion.image.full}`;
+    if (championsFiltrados.length === 0){
+        championsContainer.innerHTML = `<p class = "mensajeNoItems">NO HAY CAMPEONES QUE CUMPLAN ESTE REQUISITO</p>`;
+    }else {
 
-        htmlChampions += `<a class="enlace" href="championsProfile.html?id=${champion.id}">`; //forma de pasar variables por una URL -> ?id=
-        htmlChampions += '<div class="tarjetaCampeon">';
-        htmlChampions += '<div class="marcoImagenCampeon">';
-        htmlChampions += `<div class="imagenCampeon" style="background-image: url(${urlImagenChampion}); background-repeat: no-repeat;"></div></div>`;
-        htmlChampions += '<p class="nombreCampeon">' + champion.name + '</p></div></a>';    
-    });
+       championsFiltrados.forEach(champion => {
+            let urlImagenChampion = `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`;
+    
+            htmlChampions += `<a class="enlace" href="championsProfile.html?id=${champion.id}">`; //forma de pasar variables por una URL -> ?id=
+            htmlChampions += '<div class="tarjetaCampeon">';
+            htmlChampions += '<div class="marcoImagenCampeon">';
+            htmlChampions += `<div class="imagenCampeon" style="background-image: url(${urlImagenChampion}); background-repeat: no-repeat;"></div></div>`;
+            htmlChampions += '<p class="nombreCampeon">' + champion.name + '</p></div></a>';    
+        });
 
-    championsContainer.innerHTML = htmlChampions;
-})
+        championsContainer.innerHTML = htmlChampions;
+    }
+}
