@@ -1,3 +1,4 @@
+document.addEventListener('configLoaded', function() {
 //Obtenemos el id de la URL del perfil del campeon
 const urlCampeon = new URLSearchParams(window.location.search);
 const idItem = urlCampeon.get("id");
@@ -193,4 +194,5 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/${version}/data/${idioma}/item.js
 
     contenedorMejoras.innerHTML = contenidoMejoras;
 
+})
 });
