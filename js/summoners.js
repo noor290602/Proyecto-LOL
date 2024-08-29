@@ -1,3 +1,4 @@
+document.addEventListener('configLoaded', function() {
 //Paso de variables a traves de localStorage
 let storage = window.localStorage;
 let version = storage.getItem("version");
@@ -27,3 +28,4 @@ fetch(`https://ddragon.leagueoflegends.com/cdn/${version}/data/${idioma}/summone
     summonersContainer.innerHTML = htmlSummoners;
 
 })
+});

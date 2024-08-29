@@ -1,3 +1,4 @@
+document.addEventListener('configLoaded', function() {
 const urlPagina = new URLSearchParams(window.location.search).get("page");
 const profilePicsAMostrarPorPagina = 40; // Número de imágenes por página
 let pagActual = parseInt(urlPagina) || 1;
@@ -89,3 +90,4 @@ function paginacion() {
     btnPrimerPP.href = `profilePics.html?page=1`;
     btnUltimoPP.href = `profilePics.html?page=${totPaginas}`;
 }
+});

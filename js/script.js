@@ -1,85 +1,24 @@
-// VERSIONS --------------------------------------------------------------------------
-
-const contenedorVersiones = document.getElementById("menuVersiones");
-let contenidoSelectVersiones = "";
-
-
-// Función para establecer la última version por defecto
-
+// Función para establecer la última versión por defecto
 function versionPorDefecto(arrayVersiones) {
-    
-    if (!localStorage.getItem("version")) {
+    if (!localStorage.getItem("version") && arrayVersiones.length > 0) {
         localStorage.setItem("version", arrayVersiones[0]);
     }
+    
+    return localStorage.getItem("version") || arrayVersiones[0];
 }
-
-contenedorVersiones.addEventListener("change", guardarSelectVersion); //escucha el select de versiones
-
-fetch('https://ddragon.leagueoflegends.com/api/versions.json') 
-    .then(response => response.json())
-    .then((versiones) => {
-
-        versionPorDefecto(versiones);
-
-        versiones.forEach(version => {
-            if (localStorage.version != null){ //comprobamos que tenga datos
-                if(localStorage.version == version){ //comprobamos que sea el mismo
-                    contenidoSelectVersiones += `<option value="${version}" selected>${version}</option> <img src="resources/svg/gaming-pad.svg"/>`;
-                    return //salir del if
-                }
-            }
-
-           contenidoSelectVersiones += `<option value="${version}">${version}</option> <img src="resources/svg/gaming-pad.svg"/>`;
-        });
-
-        contenedorVersiones.innerHTML = contenidoSelectVersiones;
- })
-
-
-//IDIOMAS --------------------------------------------------------------------------
-
-const contenedorIdiomas = document.getElementById("menuIdiomas");
-let contenidoSelectIdiomas = "";
 
 // Función para establecer un idioma por defecto
 function idiomaPorDefecto() {
-
     if (!localStorage.getItem("idioma")) {
-        localStorage.setItem("idioma", "es_ES"); 
-    }
-}
-
-contenedorIdiomas.addEventListener("change", guardarSelectIdioma); //escucha el select de idiomas
-
-fetch('https://ddragon.leagueoflegends.com/cdn/languages.json') 
-    .then(response => response.json())
-    .then((idiomas) => {
-        
-        idiomaPorDefecto();
-
-        idiomas.forEach(idioma => {
-            if (localStorage.idioma != null){ //comprobamos que tenga datos
-                if(localStorage.idioma == idioma){ //comprobamos que sea el mismo
-                    contenidoSelectIdiomas += `<option value="${idioma}" selected>${idioma}</option> <img src="resources/svg/gaming-pad.svg"/>`;
-                    return //salir del if
-                }
-            }
-            contenidoSelectIdiomas += `<option value="${idioma}">${idioma}</option>`;
-         });
-
-         contenedorIdiomas.innerHTML = contenidoSelectIdiomas;
-})
-
-
-// Funciones para guardar los selects -----------------------------------------------------------------------------------
-
-function guardarSelectVersion(event) {
-    if (localStorage == null){
-        localStorage.setItem("version", event.target.arrayVersiones[0])
-    } else {
-        localStorage.setItem("version", event.target.value);
+        localStorage.setItem("idioma", "es_ES");
     }
     
+    return localStorage.getItem("idioma") || "es_ES";
+}
+
+// Funciones para guardar los selects
+function guardarSelectVersion(event) {
+    localStorage.setItem("version", event.target.value);
     location.reload();
 }
 
@@ -88,8 +27,80 @@ function guardarSelectIdioma(event) {
     location.reload();
 }
 
-// NOTAS ------------------------
- // Para ver el evento:
-    // debugger;
-    // console.log(event);
-    //version = event.target;
+// Variables globales para versión e idioma
+let versionActual = "";
+let idiomaActual = "";
+
+// Cargar versiones
+function cargarVersiones() {
+    const contenedorVersiones = document.getElementById("menuVersiones");
+    let contenidoSelectVersiones = "";
+
+    fetch('https://ddragon.leagueoflegends.com/api/versions.json')
+        .then(response => response.json())
+        .then((versiones) => {
+            versionActual = versionPorDefecto(versiones);
+
+            versiones.forEach(version => {
+                const selected = versionActual === version ? 'selected' : '';
+                contenidoSelectVersiones += `<option value="${version}" ${selected}>${version}</option>`;
+            });
+
+            contenedorVersiones.innerHTML = contenidoSelectVersiones;
+            contenedorVersiones.addEventListener("change", guardarSelectVersion);
+            
+            // Disparar evento de versión cargada
+            document.dispatchEvent(new Event('versionLoaded'));
+        })
+        
+}
+
+// Cargar idiomas
+function cargarIdiomas() {
+    const contenedorIdiomas = document.getElementById("menuIdiomas");
+    let contenidoSelectIdiomas = "";
+
+    fetch('https://ddragon.leagueoflegends.com/cdn/languages.json')
+        .then(response => response.json())
+        .then((idiomas) => {
+            idiomaActual = idiomaPorDefecto();
+
+            idiomas.forEach(idioma => {
+                const selected = idiomaActual === idioma ? 'selected' : '';
+                contenidoSelectIdiomas += `<option value="${idioma}" ${selected}>${idioma}</option>`;
+            });
+
+            contenedorIdiomas.innerHTML = contenidoSelectIdiomas;
+            contenedorIdiomas.addEventListener("change", guardarSelectIdioma);
+            
+            // Disparar evento de idioma cargado
+            document.dispatchEvent(new Event('idiomaLoaded'));
+        })
+        
+}
+
+// Cargamos el DOM antes de cargar las versiones y el idioma
+document.addEventListener('DOMContentLoaded', () => {
+    cargarVersiones();
+    cargarIdiomas();
+});
+
+// Evento cuando ambos (versión e idioma) están cargados
+let versionLoaded = false;
+let idiomaLoaded = false;
+
+document.addEventListener('versionLoaded', () => {
+    versionLoaded = true;
+    checkBothLoaded();
+});
+
+document.addEventListener('idiomaLoaded', () => {
+    idiomaLoaded = true;
+    checkBothLoaded();
+});
+
+function checkBothLoaded() {
+    if (versionLoaded && idiomaLoaded) {
+        document.dispatchEvent(new Event('configLoaded'));
+    }
+}
