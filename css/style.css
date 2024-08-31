@@ -342,7 +342,7 @@ input {
     gap: 10px;
 }
 
-#roles span, .estadisticas, .ordenar, #etiquetas span {
+#roles span, #ordenar span, #etiquetas span {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -352,7 +352,7 @@ input {
     width: 250px;
 }
 
-#etiquetas, #roles {
+#etiquetas, #roles, #ordenar {
     position: relative; 
     display: inline-block; /* Asegura que el contenedor se ajuste a su contenido */
 
@@ -377,7 +377,7 @@ input {
         margin-bottom: 5px; /* Añade espacio entre cada item de la lista */
     }
 
-    ul li .etiquetaSeleccionada, ul li .rolSeleccionado{
+    ul li .etiquetaSeleccionada, ul li .rolSeleccionado, ul li .opcionOrdenarSeleccionada{
         margin-right: 10px; /* Añade espacio entre el checkbox y el texto */
         width: 1em;
         height: 1em;
@@ -663,12 +663,6 @@ input {
     display: flex;
     flex-direction: column;
     gap: 60px;
-}
-
-.seccionEstadistica {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
 }
 
 .seccionRecurso{

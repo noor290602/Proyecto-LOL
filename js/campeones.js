@@ -6,6 +6,9 @@ document.addEventListener("configLoaded", function () {
   let rolesSeleccionados = [];
   let mostrarListaRoles = false;
 
+  let mostrarChampionsOrdenados = false;
+  let ordenSeleccionado = 'asc'; // 'asc' para A-Z, 'desc' para Z-A
+
   fetch(
     `https://ddragon.leagueoflegends.com/cdn/${versionActual}/data/${idiomaActual}/champion.json`
   )
@@ -28,7 +31,10 @@ document.addEventListener("configLoaded", function () {
       
 
       let flechaListaRoles = document.getElementById("flechaListaRoles");
-        flechaListaRoles.addEventListener("click", desplegarRoles);
+      flechaListaRoles.addEventListener("click", desplegarRoles);
+
+      let flechaOrdenarChampions = document.getElementById("flechaOrdenarChampions");
+      flechaOrdenarChampions.addEventListener("click", desplegarOpcionesOrdenarPor);
 
       //Buscador --------------------------------------------------------------------------------------------
       let inputBuscador = document.getElementById("buscador"); //valor que escribe el user
@@ -55,19 +61,27 @@ document.addEventListener("configLoaded", function () {
   function mostrarCampeones() {
     let championsFiltrados = championsSinFiltrar;
 
+    // Buscador
     if (textoBuscado.length > 0) {
       championsFiltrados = championsFiltrados.filter((champion) =>
         champion.name.toLowerCase().includes(textoBuscado)
       );
     }
 
+    // Roles
     if (rolesSeleccionados.length > 0) {
       championsFiltrados = championsFiltrados.filter(champion =>
           rolesSeleccionados.every(rol =>
               champion.tags.includes(rol)
           )
       );
-  }
+    }
+
+    // Ordenar
+    championsFiltrados.sort((a, b) => a.name.localeCompare(b.name));
+    if (ordenSeleccionado === 'desc') {
+        championsFiltrados.reverse();
+    }
 
     const championsContainer = document.getElementsByClassName("tarjetasChampions")[0];
     championsContainer.innerHTML = "";
@@ -123,7 +137,7 @@ document.addEventListener("configLoaded", function () {
             }
           }
 
-          //Mostramos las etiquetas clickadas abajo
+          //Mostramos los roles clickados abajo
           let contenedorRolesMostrados = document.getElementById("rolesMostradosChampions");
 
           let contenidoRolesMostrados = "";
@@ -139,6 +153,41 @@ document.addEventListener("configLoaded", function () {
     } else {
         listaRolesChampions.style.display = "none"; //cierra la lista
         document.getElementById("flechaListaRoles").style.transform = ""; //le damos la vuelta a la flecha
+    }
+  }
+
+  function desplegarOpcionesOrdenarPor() {
+    mostrarChampionsOrdenados = !mostrarChampionsOrdenados;
+
+    let listaOpcionesOrdenarChampions = document.getElementById("listaOpcionesOrdenarChampions");
+
+    if (mostrarChampionsOrdenados) {
+      listaOpcionesOrdenarChampions.style.display = "block"; //muestra la lista
+      document.getElementById("flechaOrdenarChampions").style.transform = "scaleY(-1)"; //le damos la vuelta a la flecha
+      
+      let contenidoOpciones = `
+            <li class="opcionOrdenar">
+                <input type="radio" class="opcionOrdenarSeleccionada" name="ordenar" value="asc" ${ordenSeleccionado === 'asc' ? 'checked' : ''}/> A-Z
+            </li>
+            <li class="opcionOrdenar">
+                <input type="radio" class="opcionOrdenarSeleccionada"  name="ordenar" value="desc" ${ordenSeleccionado === 'desc' ? 'checked' : ''}/> Z-A
+            </li>
+        `;
+
+      listaOpcionesOrdenarChampions.innerHTML = contenidoOpciones;
+
+      //Filtrar
+       // Agregar event listeners a las opciones de radio
+       document.querySelectorAll('input[name="ordenar"]').forEach((radio) => {
+        radio.addEventListener("change", (event) => {
+                ordenSeleccionado = event.target.value;
+                mostrarCampeones();
+            });
+        });
+    
+    } else {
+      listaOpcionesOrdenarChampions.style.display = "none";
+        document.getElementById("flechaOrdenarChampions").style.transform = "";
     }
   }
 });
