@@ -10,14 +10,19 @@ document.addEventListener('configLoaded', function() {
     let etiquetasSeleccionadas = [];
     let mostrarListaEtiquetas = false;
 
+    let categoriasItems = [];
+    let categoriaSeleccionada = null;
+
     fetch(`https://ddragon.leagueoflegends.com/cdn/${version}/data/${idioma}/item.json`)
     .then(response => response.json())
     .then((response) => {
         const json = response;
         const items = json.data;
+        categoriasItems = json.tree;
         itemsSinFiltrar = Object.entries(items);
 
-        // Etiquetas --------------------------------------------------------------------------------------
+        // Etiquetas --------------------------------------------------------------------------------------------
+
         itemsSinFiltrar.forEach(([key, item]) => {
             item.tags.forEach(tag => {
                 if (!etiquetas.includes(tag)) {
@@ -29,7 +34,31 @@ document.addEventListener('configLoaded', function() {
         let flechaListaEtiquetas = document.getElementById("flechaListaEtiquetas");
         flechaListaEtiquetas.addEventListener("click", desplegarEtiquetasItems);
 
-        // Buscador --------------------------------------------------------------------------------------
+        // Categorias items -------------------------------------------------------------------------------------
+
+        let contenedorCategoriasItems = document.getElementById('categoriasItems');
+        contenedorCategoriasItems.innerHTML = "";
+        let contenidoCategoriasItems = "";
+
+        categoriasItems.forEach(categoria => {
+            contenidoCategoriasItems += `<div class="categoriaItem" data-header="${categoria.header}">${categoria.header}</div>`;
+        });
+
+        contenedorCategoriasItems.innerHTML = contenidoCategoriasItems;
+
+        // Aplicar estilo inicial a todos los divs de categorías
+        document.querySelectorAll('.categoriaItem').forEach(div => {
+            div.style.backgroundColor = '#ffffff7b'; 
+        });
+
+        // Event listener categorías
+        document.querySelectorAll('.categoriaItem').forEach(div => {
+            div.addEventListener('click', () => seleccionarCategoria(div.dataset.header));
+        });
+
+
+        // Buscador ---------------------------------------------------------------------------------------------
+
         let inputBuscador = document.getElementById("buscador"); // valor que escribe el user
         inputBuscador.addEventListener("input", () => {
             textoBuscado = inputBuscador.value.toLowerCase();
@@ -37,6 +66,7 @@ document.addEventListener('configLoaded', function() {
         });
 
         // Borrar buscador --------------------------------------------------------------------------------------
+
         let btnBorrar = document.getElementById("btnBorrar");
         function limpiar() {
             let inputBuscador = document.getElementById("buscador");
@@ -51,12 +81,14 @@ document.addEventListener('configLoaded', function() {
     function mostrarItems() {
         let itemsFiltrados = itemsSinFiltrar;
 
+        //Buscador -------------------------------------------------------------------------------------------
         if (textoBuscado.length > 0) {
             itemsFiltrados = itemsFiltrados.filter(([key, item]) =>
                 item.name.toLowerCase().includes(textoBuscado)
             );
         }
-
+        
+        //Etiquetas ------------------------------------------------------------------------------------------
         if (etiquetasSeleccionadas.length > 0) {
             itemsFiltrados = itemsFiltrados.filter(([key, item]) =>
                 etiquetasSeleccionadas.every(tag =>
@@ -65,6 +97,20 @@ document.addEventListener('configLoaded', function() {
             );
         }
 
+        //Categorias items -----------------------------------------------------------------------------------
+        if (categoriaSeleccionada) {
+            const categoriaActual = categoriasItems.find(cat => cat.header === categoriaSeleccionada);
+            if (categoriaActual) {
+                itemsFiltrados = itemsFiltrados.filter(([key, item]) => 
+                    item.tags.some(tag => 
+                        categoriaActual.tags.map(t => t.toLowerCase()).includes(tag.toLowerCase()) //se mapea pq ayuda a que la comparación se haga bien y se pone todo en minúscula pq en el json están diferentes
+                    )
+                );
+            }
+        }
+        
+        
+        //Pintar tarjetas items ------------------------------------------------------------------------------
         const itemsContainer = document.getElementById('tarjetasItems');
         itemsContainer.innerHTML = '';
         let htmlItems = '';
@@ -81,6 +127,8 @@ document.addEventListener('configLoaded', function() {
                 htmlItems += `<div class="imagenItems" style="background-image: url(${urlImagenItem}); background-repeat: no-repeat;"></div></div>`;
                 htmlItems += '<p class="nombreItems">' + item.name + '</p></div></a>';
             });
+
+            
         
             itemsContainer.innerHTML = htmlItems;
         }
@@ -136,4 +184,28 @@ document.addEventListener('configLoaded', function() {
             document.getElementById('flechaListaEtiquetas').style.transform = ""; // le damos la vuelta a la flecha
         }
     }
+
+    function seleccionarCategoria(categoryHeader) {
+        document.querySelectorAll('.categoriaItem').forEach(div => {
+            if (div.dataset.header === categoryHeader) {
+                if (div.style.backgroundColor === 'transparent') {
+                    // Si ya estaba seleccionado, volvemos al estado normal
+                    div.style.backgroundColor = '#ffffff7b'; 
+                    categoriaSeleccionada = null;
+                } else {
+                    // Si no estaba seleccionado, lo seleccionamos
+                    div.style.backgroundColor = 'transparent';
+                    categoriaSeleccionada = categoryHeader;
+                }
+            } else {
+                // Restauramos el color normal para los demás divs
+                div.style.backgroundColor = '#ffffff7b'; 
+            }
+        });
+
+        console.log(categoriaSeleccionada);
+
+        mostrarItems();
+    }
+    
 });

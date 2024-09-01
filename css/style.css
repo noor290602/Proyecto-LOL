@@ -1018,11 +1018,12 @@ input {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 50px;
     gap: 50px;
 }
 
-#opciones {
+#categoriasItems, #opciones {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -1031,7 +1032,7 @@ input {
     user-select: none;
 }
 
-.opcion {
+.categoriaItem, .opcion {
     display: flex;
     justify-content: center;
     align-items: center;
